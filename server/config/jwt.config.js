@@ -1,4 +1,5 @@
 const passportJWT = require('passport-jwt');
+const env = require('./env.config');
 
 // ExtractJwt to help extract the token
 const { ExtractJwt } = passportJWT;
@@ -6,7 +7,7 @@ const { ExtractJwt } = passportJWT;
 const JwtStrategy = passportJWT.Strategy;
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = 'secret'; // TODO: chage to secret from env
+jwtOptions.secretOrKey = env.SECRET_KEY;
 
 exports.JwtStrategy = JwtStrategy;
 exports.jwtOptions = jwtOptions;

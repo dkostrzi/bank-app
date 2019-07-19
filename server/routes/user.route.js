@@ -8,7 +8,6 @@ module.exports = app => {
     passport.authenticate('jwt', { session: false }),
     userController.getAllUsers,
   );
-  app.get('/api/test', userController.show);
 
   app.get(
     '/api/protected',
@@ -18,6 +17,6 @@ module.exports = app => {
     },
   );
 
-  app.post('/api', auth.optional, userController.registerUser);
+  app.post('/api/register', auth.optional, userController.registerUser);
   app.post('/api/login', auth.optional, userController.loginUser);
 };

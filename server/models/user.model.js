@@ -7,13 +7,13 @@ module.exports = (sequelize, Sequelize) => {
     },
     login: {
       type: Sequelize.BIGINT,
-      allowNull: true,
+      allowNull: false,
       isNumeric: true,
-      /* validate: {
+      validate: {
         notEmpty: {
           msg: 'The login is required.',
         },
-      }, */
+      },
     },
     password: {
       type: Sequelize.STRING,
