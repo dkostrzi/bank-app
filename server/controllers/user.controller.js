@@ -1,9 +1,6 @@
 /*eslint-disable */
-const crypto = require('crypto');
+
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
-const User = require('../models/user.model');
-const db = require('../config/db.config');
 const helpers = require('../helpers/db.helper');
 const { jwtOptions } = require('../config/jwt.config');
 const bcrypt = require('bcrypt');
@@ -20,39 +17,6 @@ exports.show = (req, res) => {
   res.status(200).json(resposne);
 };
 
-/* exports.registerUser = (req, res, next) => {
-  const {
-    body: { user },
-  } = req;
-
-  if (!user.email) {
-    return res.status(422).json({
-      errors: {
-        email: 'is required',
-      },
-    });
-  }
-
-  if (!user.password) {
-    return res.status(422).json({
-      errors: {
-        password: 'is required',
-      },
-    });
-  }
-
-
-
-  const finalUser = {
-    password: new User().setPassword(user.password)
-  }
-  //finalUser.user(user.email, user.password);
- // finalUser.setPassword(user.password);
-
-  db.users.create(finalUser).then(() => {
-    res.json({ user: finalUser.toAuthJSON() });
-  });
-}; */
 
 exports.registerUser = (req, res, next) => {
   const { email, password } = req.body;
