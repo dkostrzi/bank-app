@@ -2,6 +2,7 @@
 coverage
 build
 node_modules
+server/config/env.config.js
 stats.json
 
 # Cruft
