@@ -1,5 +1,3 @@
-const crypto = require('crypto');
-
 module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define('user', {
     id: {
@@ -25,24 +23,6 @@ module.exports = (sequelize, Sequelize) => {
         notEmpty: {
           msg: 'The password is required.',
         },
-      },
-    },
-    hash: {
-      type: Sequelize.STRING,
-      allowNull: true,
-      defaultValue: '',
-      /* validate: {
-        notEmpty: {
-          msg: 'The password is required.',
-        },
-      }, */
-    },
-    salt: {
-      type: Sequelize.STRING,
-      allowNull: true,
-      defaultValue: '',
-      set() {
-        this.setDataValue('salt', crypto.randomBytes(16).toString('hex'));
       },
     },
     name: {

@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 const env = require('./env.config.js');
+
 const sequelize = new Sequelize(env.database, env.username, env.password, {
   host: env.host,
   dialect: env.dialect,
@@ -20,15 +22,29 @@ db.users = require('../models/user.model')(sequelize, Sequelize);
 
 db.start = () => {
   //  console.log("USER ID",us.getId());
-  sequelize.sync({ force: true }).then(() => {
-    db.users.create({
-      login: env.adminAccount.login,
-      password: env.adminAccount.password,
-      name: env.adminAccount.name,
-      surname: env.adminAccount.surname,
-      email: env.adminAccount.email,
-      date_registration: new Date(),
-    });
+  const hash = bcrypt.hashSync(env.adminAccount.password, 10);
+  sequelize.sync({ force: false }).then(() => {
+    db.users
+      .findOne({
+        where: {
+          email: env.adminAccount.email,
+        },
+      })
+      .then(user => {
+        if (!user) {
+          db.users.create({
+            login: env.adminAccount.login,
+            password: hash,
+            name: env.adminAccount.name,
+            surname: env.adminAccount.surname,
+            email: env.adminAccount.email,
+            date_registration: new Date(),
+          });
+        } else {
+          /* eslint-disable-next-line */
+          console.log('user exist');
+        }
+      });
   });
 };
 

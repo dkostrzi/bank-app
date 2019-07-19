@@ -45,11 +45,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// import passport and passport-jwt modules
-
-
-
-
 
 require('./config/passport');
 app.use(passport.initialize());
