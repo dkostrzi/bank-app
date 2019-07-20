@@ -3,6 +3,7 @@
 
 const express = require('express');
 const logger = require('./utils/logger');
+const passport = require('passport');
 
 const argv = require('./utils/argv');
 const port = require('./utils/port');
@@ -43,6 +44,10 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+
+require('./config/passport');
+app.use(passport.initialize());
 
 require('./routes/user.route')(app);
 

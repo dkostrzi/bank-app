@@ -15,6 +15,60 @@ module.exports = (sequelize, Sequelize) => {
         },
       },
     },
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: '',
+      validate: {
+        notEmpty: {
+          msg: 'The password is required.',
+        },
+      },
+    },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      defaultValue: '',
+      /* validate: {
+         notEmpty: {
+           msg: 'The name is required.',
+         },
+       }, */
+    },
+    surname: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      defaultValue: '',
+      /* validate: {
+        notEmpty: {
+          msg: 'The surname is required.',
+        },
+      }, */
+    },
+    email: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: '',
+      validate: {
+        isEmail: true,
+        notEmpty: {
+          msg: 'The email is required.',
+        },
+      },
+    },
+    date_registration: {
+      type: Sequelize.DATE,
+      allowNull: false,
+    },
+    last_successful_logged: {
+      type: Sequelize.DATE,
+    },
+    last_failed_logged: {
+      type: Sequelize.DATE,
+    },
+    last_present_logged: {
+      type: Sequelize.DATE,
+    },
   });
 
   return User;
