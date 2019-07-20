@@ -19,11 +19,12 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require('../models/user.model')(sequelize, Sequelize);
+db.bills = require('../models/bill.model')(sequelize, Sequelize);
 
 db.start = () => {
   //  console.log("USER ID",us.getId());
   const hash = bcrypt.hashSync(env.adminAccount.password, 10);
-  sequelize.sync({ force: false }).then(() => {
+  sequelize.sync({ force: true }).then(() => {
     db.users
       .findOne({
         where: {
@@ -32,14 +33,24 @@ db.start = () => {
       })
       .then(user => {
         if (!user) {
-          db.users.create({
-            login: env.adminAccount.login,
-            password: hash,
-            name: env.adminAccount.name,
-            surname: env.adminAccount.surname,
-            email: env.adminAccount.email,
-            date_registration: new Date(),
-          });
+          db.users
+            .create({
+              login: env.adminAccount.login,
+              password: hash,
+              name: env.adminAccount.name,
+              surname: env.adminAccount.surname,
+              email: env.adminAccount.email,
+              date_registration: new Date(),
+            })
+            .then(createdUser => {
+              if (createdUser) {
+                db.bills.create({
+                  id_owner: createdUser.id,
+                  account_bill: env.adminAccount.account_bill,
+                  available_funds: env.adminAccount.available_funds,
+                });
+              }
+            });
         } else {
           /* eslint-disable-next-line */
           console.log('user exist');

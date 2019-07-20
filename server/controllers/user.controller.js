@@ -2,10 +2,13 @@
 
 const jwt = require('jsonwebtoken');
 const helpers = require('../helpers/db.helper');
+const getRandomInt = require('../helpers/helpersfunction.helper');
 const { jwtOptions } = require('../config/jwt.config');
 const bcrypt = require('bcrypt');
+const db = require('../config/db.config');
 
 exports.getAllUsers = (req, res) => {
+  console.log('DECODED***********8', req.decoded);
   helpers.getAllUsers().then(user => res.status(200).json(user));
 };
 
@@ -16,7 +19,18 @@ exports.registerUser = (req, res, next) => {
   const hash = bcrypt.hashSync(password, 10);
   helpers
     .createUser({ email, hash, login })
-    .then(user => res.json({ user, msg: 'account created successfully' }))
+    .then(user => {
+
+      db.bills.create({
+        id_owner: user.id,
+        available_funds: 0,
+        account_bill: getRandomInt(10000000000000000000000000, 99999999999999999999999999),
+      }).then(bill => {
+        res.json({ user, msg: 'account created successfully', bill });
+      });
+      return null
+    })
+
     .catch(function(err) {
       // handle error;
       res.status(400).json({ error: err.errors[0].message });
@@ -25,7 +39,9 @@ exports.registerUser = (req, res, next) => {
 
 //TODO: log user by login
 exports.loginUser = async (req, res, next) => {
+
   const { email, password } = req.body;
+
   if (email && password) {
     const user = await helpers.getUser({ email });
 
@@ -42,7 +58,7 @@ exports.loginUser = async (req, res, next) => {
       });
 
 
-      const payload = { id: user.id, tes: 'dsdsds' };
+      const payload = { id: user.id, email: user.email };
       const token = jwt.sign(payload, jwtOptions.secretOrKey, {
         expiresIn: '60min',
       });

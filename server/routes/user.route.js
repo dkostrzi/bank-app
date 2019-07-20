@@ -1,13 +1,12 @@
+/* eslint-disable */
+
 const passport = require('passport');
 const userController = require('../controllers/user.controller');
+const { checkToken } = require('../middlewares/checkToken.middleware');
 const auth = require('./auth');
 
 module.exports = app => {
-  app.get(
-    '/api/users',
-    passport.authenticate('jwt', { session: false }),
-    userController.getAllUsers,
-  );
+  app.get('/api/users', checkToken, userController.getAllUsers);
 
   app.get(
     '/api/protected',
