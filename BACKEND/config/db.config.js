@@ -20,6 +20,7 @@ db.sequelize = sequelize;
 
 db.users = require('../models/user.model')(sequelize, Sequelize);
 db.bills = require('../models/bill.model')(sequelize, Sequelize);
+db.transactions = require('../models/transaction.model')(sequelize, Sequelize);
 
 db.start = () => {
   //  console.log("USER ID",us.getId());

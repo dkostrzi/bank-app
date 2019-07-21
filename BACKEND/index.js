@@ -51,6 +51,7 @@ app.use(passport.initialize());
 
 require('./routes/user.route')(app);
 require('./routes/bill.route')(app);
+require('./routes/transaction.route')(app);
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
