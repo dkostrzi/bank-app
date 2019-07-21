@@ -24,7 +24,7 @@ db.bills = require('../models/bill.model')(sequelize, Sequelize);
 db.start = () => {
   //  console.log("USER ID",us.getId());
   const hash = bcrypt.hashSync(env.adminAccount.password, 10);
-  sequelize.sync({ force: true }).then(() => {
+  sequelize.sync({ force: false }).then(() => {
     db.users
       .findOne({
         where: {
