@@ -32,6 +32,8 @@ exports.logInMiddleware = (req, res, next) => {
           req.loginInfo = {
             auth: true,
             token: token,
+            uId:user.id,
+            email:user.email,
             message: 'user found & logged in',
           };
           next();
