@@ -18,6 +18,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+// TODO: set relationship
 db.users = require('../models/user.model')(sequelize, Sequelize);
 db.bills = require('../models/bill.model')(sequelize, Sequelize);
 db.transactions = require('../models/transaction.model')(sequelize, Sequelize);

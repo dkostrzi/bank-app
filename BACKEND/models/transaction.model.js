@@ -68,6 +68,26 @@ module.exports = (sequelize, Sequelize) => {
           },
         },
       },
+      authorization_key: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'key',
+        validate: {
+          notEmpty: {
+            msg: 'The authorization_key is required.',
+          },
+        },
+      },
+      authorization_status: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+        validate: {
+          notEmpty: {
+            msg: 'The authorization_status is required.',
+          },
+        },
+      },
 
     },
   );

@@ -27,6 +27,14 @@ exports.registerTransaction = (req, res) => {
     );
   }
 
+  //TODO:generate transaction key
+  function generateKey() {
+    const key = 'transaction_key';
+
+    return key;
+  }
+
+
   const senderId = req.decoded.id;
 
   const { recipientId, amountMoney, transferTitle } = req.body;
@@ -51,6 +59,7 @@ exports.registerTransaction = (req, res) => {
                 id_recipient: recipientId,
                 date_time: new Date(),
                 amount_money: amountMoney,
+                authorization_key:generateKey(),
                 transfer_title: transferTitle,
               });
               res.status(200).json({ success: true });
