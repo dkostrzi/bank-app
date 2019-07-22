@@ -47,14 +47,14 @@ module.exports = (sequelize, Sequelize) => {
     },
     email: {
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: '',
-      validate: {
+      /* validate: {
         isEmail: true,
         notEmpty: {
           msg: 'The email is required.',
         },
-      },
+      }, */
     },
     date_registration: {
       type: Sequelize.DATE,
