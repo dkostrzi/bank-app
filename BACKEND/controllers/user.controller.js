@@ -19,7 +19,7 @@ exports.getTokenInfo = (req, res) => {
 
 
 //TODO: check if user login or email exist
-exports.registerUser = (req, res, next) => {
+exports.register = (req, res, next) => {
   const { email, password, login } = req.body;
   const hash = bcrypt.hashSync(password, 10);
   helpers
@@ -43,11 +43,15 @@ exports.registerUser = (req, res, next) => {
 };
 
 
+exports.registerUser = (req, res) => {
+
+  res.status(200).json(req.data);
+};
+
 exports.loginUser = (req, res) => {
 
   res.status(200).json(req.loginInfo);
 };
-
 
 
 /*exports.log = async (req, res, next) => {

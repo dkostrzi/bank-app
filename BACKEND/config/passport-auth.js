@@ -12,6 +12,7 @@ const passport = require('passport'),
   JWTstrategy = require('passport-jwt').Strategy,
   ExtractJWT = require('passport-jwt').ExtractJwt;
 
+  //TODO:change to email register not login
 passport.use(
   'register',
   new localStrategy(
@@ -20,7 +21,7 @@ passport.use(
       passwordField: 'password',
       session: false,
     },
-    (username, password, done) => {
+    (login, password, done) => {
       try {
         User.findOne({
           where: {
@@ -28,11 +29,12 @@ passport.use(
           },
         }).then(user => {
           if (user != null) {
+            //TODO: errors handler response
             console.log('username already taken');
             return done(null, false, { message: 'username already taken' });
           } else {
             bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-              User.create({ login, password: hashedPassword }).then(user => {
+              User.create({ login, password: hashedPassword,date_registration:new Date() }).then(user => {
                 console.log('user created');
                 // note the return needed with passport local - remove this return for passport JWT to work
                 return done(null, user);

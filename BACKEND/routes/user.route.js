@@ -6,22 +6,16 @@ const { checkToken } = require('../middlewares/checkToken.middleware');
 const auth = require('./auth');
 const jwt = require('jsonwebtoken');
 const User = require('../config/db.config').users;
-const logInMiddleware = require('../middlewares/logIn.middleware').logInMiddleware;
+const logInMiddleware = require('../middlewares/logInRegister.middleware').logInMiddleware;
+const registerMiddleware = require('../middlewares/logInRegister.middleware').registerMiddleware;
 
 module.exports = app => {
   app.get('/api/users', checkToken, userController.getAllUsers);
 
   app.get('/api/token',checkToken,userController.getTokenInfo);
 
-  app.get(
-    '/api/protected',
-    passport.authenticate('jwt', { session: false }),
-    function(req, res) {
-      res.json('Success! You can now see this without a token.');
-    },
-  );
-
-  app.post('/api/register', auth.optional, userController.registerUser);
+  //app.post('/api/register', auth.optional, userController.registerUser);
+  app.post('/api/register',registerMiddleware , userController.registerUser);
   //app.post('/api/login', auth.optional, userController.loginUser);
 
   app.post('/api/login', logInMiddleware, userController.loginUser);
