@@ -4,6 +4,7 @@ build
 node_modules
 BACKEND/config/env.config.js
 stats.json
+bank_front/public
 
 # Cruft
 .DS_Store
