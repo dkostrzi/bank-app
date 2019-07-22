@@ -8,6 +8,7 @@ const JwtStrategy = passportJWT.Strategy;
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = env.SECRET_KEY;
+jwtOptions.expiresTime = '60min';
 
 exports.JwtStrategy = JwtStrategy;
 exports.jwtOptions = jwtOptions;

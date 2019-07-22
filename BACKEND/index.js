@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 });
 
 
-require('./config/passport');
+require('./config/passport-auth');
 app.use(passport.initialize());
 
 require('./routes/user.route')(app);

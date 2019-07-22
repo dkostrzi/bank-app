@@ -13,6 +13,11 @@ exports.getAllUsers = (req, res) => {
 };
 
 
+exports.getTokenInfo = (req, res) => {
+  res.json(req.decoded);
+};
+
+
 //TODO: check if user login or email exist
 exports.registerUser = (req, res, next) => {
   const { email, password, login } = req.body;
@@ -28,7 +33,7 @@ exports.registerUser = (req, res, next) => {
       }).then(bill => {
         res.json({ user, msg: 'account created successfully', bill });
       });
-      return null
+      return null;
     })
 
     .catch(function(err) {
@@ -37,8 +42,15 @@ exports.registerUser = (req, res, next) => {
     });
 };
 
-//TODO: log user by login
-exports.loginUser = async (req, res, next) => {
+
+exports.loginUser = (req, res) => {
+
+  res.status(200).json(req.loginInfo);
+};
+
+
+
+/*exports.log = async (req, res, next) => {
 
   const { email, password } = req.body;
 
@@ -71,4 +83,6 @@ exports.loginUser = async (req, res, next) => {
       res.status(401).json({ msg: 'Password is incorrect' });
     }
   }
-};
+};*/
+
+
