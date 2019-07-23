@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
+import { toastr } from 'react-redux-toastr';
 
 export const authStart = () => {
   return {
@@ -19,6 +20,7 @@ export const authSuccess = (token, userId, email,expires) => {
 };
 
 export const authFailed = (error) => {
+  toastr.error('Error', error)
   return {
     type: actionTypes.AUTH_FAIL,
     error: error,

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { API_URL } from '../../utils/api';
 import heroImg from '../../assets/images/bank-hero-nooverlay.png';
 import logoImg from '../../assets/images/logo.png';
+import {toastr} from 'react-redux-toastr'
 
 import './LoginPage.scss';
 import Spinner from '../../components/Spinner/Spinner';
@@ -30,7 +31,12 @@ class LoginPage extends Component {
   auth = () => {
     console.log(this.props.isAuthenticated);
     this.props.onAuth(this.state.login, this.state.password);
+
   };
+
+  showToastr = (message) =>{
+
+  }
 
   render() {
     let authRedirect = null;
@@ -47,8 +53,11 @@ class LoginPage extends Component {
 
     const loginBtn = this.props.auth.loading?<Spinner/>:"Login";
 
+    const errorsMessage = this.props.auth.error?<span style={{color:'red'}}>{this.props.auth.error}</span>:null;
+
     return (
       <>
+
         {authRedirect}
         <div className="LoginPage">
           <div className="hero" style={styles}>
@@ -63,10 +72,12 @@ class LoginPage extends Component {
               <img src={logoImg} alt="logo"/>
             </div>
             <div className="login-form__form">
+
               <input type="text" value={this.state.login} placeholder="login"
                      onChange={(event) => this.handleChangeInput(event, 'login')}/>
               <input type="password" value={this.state.password} placeholder="password"
                      onChange={(event) => this.handleChangeInput(event, 'password')}/>
+              {errorsMessage}
               <button className="waves-effect waves-light btn-large blue darken-1 btn-loading" onClick={this.auth}>
                 {loginBtn}
               </button>

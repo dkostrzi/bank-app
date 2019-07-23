@@ -7,7 +7,7 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomePage from '../HomePage/HomePage';
 import Loading from '../../components/Loading/Loading';
-
+import ReduxToastr from 'react-redux-toastr'
 
 class App extends Component {
 
@@ -34,6 +34,15 @@ class App extends Component {
     return (
       <>
         {loading}
+        <ReduxToastr
+          timeOut={3000}
+          newestOnTop={false}
+          preventDuplicates
+          position="top-right"
+          transitionIn="fadeIn"
+          transitionOut="fadeOut"
+
+          closeOnToastrClick/>
         <div className="App">
           {routes}
         </div>
