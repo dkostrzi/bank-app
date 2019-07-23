@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
+import heroImg from '../../assets/images/bank-hero-nooverlay.png';
+import logoImg from '../../assets/images/logo.png';
 
-import styles from './LoginPage.module.scss';
+import './LoginPage.scss';
 
 class LoginPage extends Component {
 
@@ -35,19 +37,43 @@ class LoginPage extends Component {
       authRedirect = <Redirect to="/"/>;
     }
 
+    const styles = {
+      background:`linear-gradient(
+      rgba(3, 94, 230, 0.9), 
+      rgba(3, 94, 230, 0.9)
+    ),url(${heroImg}) `
+    }
+
     return (
       <>
         {authRedirect}
-        <h1>Login Page</h1>
-        <input type="text" value={this.state.login} placeholder="login"
-               onChange={(event) => this.handleChangeInput(event, 'login')}/>
-        <input type="password" value={this.state.password} placeholder="password"
-               onChange={(event) => this.handleChangeInput(event, 'password')}/>
-        <button onClick={this.auth}>Auth</button>
-        <p> {this.state.login} | <span>{this.state.password}</span></p>
-        <p>Is auth: {this.props.isAuthenticated ? 'true' : 'false'}</p>
-        <p>Mail: {this.props.userId}</p>
+        <div className="LoginPage">
+          <div className="hero" style={styles}>
+            <div className="hero__content">
+              <h2 className="hero__content__title">Welcome to Bank</h2>
+              <p>Join our community that have more than 10000 subscribers and learn new things everyday</p>
+              <button className="waves-effect waves-light btn-large blue darken-1">Sign In</button>
+            </div>
+          </div>
+          <div className="login-form">
+            <div className="login-form__logo">
+              <img src={logoImg} alt="logo"/>
+            </div>
+            <div className="login-form__form">
+              <input type="text" value={this.state.login} placeholder="login"
+                     onChange={(event) => this.handleChangeInput(event, 'login')}/>
+              <input type="password" value={this.state.password} placeholder="password"
+                     onChange={(event) => this.handleChangeInput(event, 'password')}/>
+              <button className="waves-effect waves-light btn-large blue darken-1" onClick={this.auth}>Login</button>
+              {/*<p> {this.state.login} | <span>{this.state.password}</span></p>*/}
+            </div>
+            <div className="login-form__signup">
+              <p>Don't have account? <span>Sign up</span></p>
+            </div>
 
+
+          </div>
+        </div>
       </>
 
     );

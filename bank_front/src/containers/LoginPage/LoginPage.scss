@@ -1,0 +1,74 @@
+.LoginPage {
+
+  display: flex;
+  height: 100%;
+
+  .hero {
+    width: 70%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+
+    &__content {
+      margin-left: 100px;
+      padding: 0 20px;
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+
+      &__title {
+        margin-bottom: 40px;
+        margin-top: 0px;
+        font-size: 2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      p {
+        font-size: 0.8rem;
+        margin-bottom: 50px;
+      }
+
+      button {
+        border-radius: 10px;
+        margin-bottom: 50px;
+      }
+    }
+  }
+
+  .login-form {
+    padding: 50px 50px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__logo {
+      text-align: center;
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin-top: 40px;
+        border-radius: 10px;
+      }
+
+
+    }
+
+    &__signup {
+      text-align: center;
+      span {
+        font-weight: 800;
+      }
+    }
+
+  }
+
+}
