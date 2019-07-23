@@ -6,6 +6,7 @@ import * as actions from '../../store/actions';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomePage from '../HomePage/HomePage';
+import Loading from '../../components/Loading/Loading';
 
 
 class App extends Component {
@@ -21,8 +22,6 @@ class App extends Component {
   render() {
 
 
-
-
     let routes = (
       <Switch>
         <Route path="/login" component={LoginPage}/>
@@ -30,12 +29,15 @@ class App extends Component {
       </Switch>
     );
 
-
+    const loading = this.props.isLoading? <Loading/>:null;
 
     return (
-      <div className="App">
-        {routes}
-      </div>
+      <>
+        {loading}
+        <div className="App">
+          {routes}
+        </div>
+      </>
     );
   }
 
@@ -44,12 +46,13 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     isAuth: state.auth.token,
+    isLoading:state.auth.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    tryAutoLogIn:()=> dispatch(actions.authCheckState())
+    tryAutoLogIn: () => dispatch(actions.authCheckState()),
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -8,6 +8,7 @@ import heroImg from '../../assets/images/bank-hero-nooverlay.png';
 import logoImg from '../../assets/images/logo.png';
 
 import './LoginPage.scss';
+import Spinner from '../../components/Spinner/Spinner';
 
 class LoginPage extends Component {
 
@@ -38,11 +39,13 @@ class LoginPage extends Component {
     }
 
     const styles = {
-      background:`linear-gradient(
+      background: `linear-gradient(
       rgba(3, 94, 230, 0.9), 
       rgba(3, 94, 230, 0.9)
-    ),url(${heroImg}) `
-    }
+    ),url(${heroImg}) `,
+    };
+
+    const loginBtn = this.props.auth.loading?<Spinner/>:"Login";
 
     return (
       <>
@@ -64,7 +67,9 @@ class LoginPage extends Component {
                      onChange={(event) => this.handleChangeInput(event, 'login')}/>
               <input type="password" value={this.state.password} placeholder="password"
                      onChange={(event) => this.handleChangeInput(event, 'password')}/>
-              <button className="waves-effect waves-light btn-large blue darken-1" onClick={this.auth}>Login</button>
+              <button className="waves-effect waves-light btn-large blue darken-1 btn-loading" onClick={this.auth}>
+                {loginBtn}
+              </button>
               {/*<p> {this.state.login} | <span>{this.state.password}</span></p>*/}
             </div>
             <div className="login-form__signup">
