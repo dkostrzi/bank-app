@@ -30,8 +30,14 @@ class LoginPage extends Component {
   };
 
   render() {
+    let authRedirect = null;
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to="/"/>;
+    }
+
     return (
       <>
+        {authRedirect}
         <h1>Login Page</h1>
         <input type="text" value={this.state.login} placeholder="login"
                onChange={(event) => this.handleChangeInput(event, 'login')}/>
@@ -41,7 +47,7 @@ class LoginPage extends Component {
         <p> {this.state.login} | <span>{this.state.password}</span></p>
         <p>Is auth: {this.props.isAuthenticated ? 'true' : 'false'}</p>
         <p>Mail: {this.props.userId}</p>
-        
+
       </>
 
     );
@@ -52,7 +58,7 @@ const mapStateToProps = state => {
     return {
       isAuthenticated: state.auth.token !== null,
       userId: state.auth.email,
-      auth:state.auth
+      auth: state.auth,
     };
   }
 ;

@@ -1,4 +1,5 @@
 export{
   authStart,
-  auth
+  auth,
+  authCheckState
 } from './auth'
