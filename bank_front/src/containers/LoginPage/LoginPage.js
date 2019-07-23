@@ -5,6 +5,8 @@ import * as actions from '../../store/actions';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
 
+import styles from './LoginPage.module.scss';
+
 class LoginPage extends Component {
 
   state = {
@@ -24,7 +26,7 @@ class LoginPage extends Component {
 
   auth = () => {
     console.log(this.props.isAuthenticated);
-    this.props.onAuth(this.state.login,this.state.password);
+    this.props.onAuth(this.state.login, this.state.password);
   };
 
   render() {
@@ -36,8 +38,10 @@ class LoginPage extends Component {
         <input type="password" value={this.state.password} placeholder="password"
                onChange={(event) => this.handleChangeInput(event, 'password')}/>
         <button onClick={this.auth}>Auth</button>
-        <p> {this.state.login} | {this.state.password}</p>
+        <p> {this.state.login} | <span>{this.state.password}</span></p>
         <p>Is auth: {this.props.isAuthenticated ? 'true' : 'false'}</p>
+        <p>Mail: {this.props.userId}</p>
+        
       </>
 
     );
@@ -47,6 +51,8 @@ class LoginPage extends Component {
 const mapStateToProps = state => {
     return {
       isAuthenticated: state.auth.token !== null,
+      userId: state.auth.email,
+      auth:state.auth
     };
   }
 ;
@@ -54,7 +60,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (login,password) => dispatch(actions.auth(login,password)),
+    onAuth: (login, password) => dispatch(actions.auth(login, password)),
   };
 };
 

@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 const helpers = require('../helpers/db.helper');
-const getRandomInt = require('../helpers/helpersfunction.helper');
+const getRandomInt = require('../helpers/helpersfunction.helper').getRandomInt;
 const { jwtOptions } = require('../config/jwt.config');
 const bcrypt = require('bcrypt');
 const db = require('../config/db.config');

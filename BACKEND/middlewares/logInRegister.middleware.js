@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 const jwtConfig = require('../config/jwt.config').jwtOptions;
 const User = require('../config/db.config').users;
 const Bill = require('../config/db.config').bills;
-const getRandomInt = require('../helpers/helpersfunction.helper');
+const getRandomInt = require('../helpers/helpersfunction.helper').getRandomInt;
+const getCurrentDate = require('../helpers/helpersfunction.helper').getCurrentDate;
 
 exports.logInMiddleware = (req, res, next) => {
   passport.authenticate('login', (err, user, info) => {
@@ -29,11 +30,17 @@ exports.logInMiddleware = (req, res, next) => {
           const token = jwt.sign(payload, jwtConfig.secretOrKey, {
             expiresIn: jwtConfig.expiresTime,
           });
+
+          let expiresDate = getCurrentDate();
+          console.log(expiresDate);
+          expiresDate.setHours(expiresDate.getHours() + 1);
+
           req.loginInfo = {
             auth: true,
             token: token,
-            uId:user.id,
-            email:user.email,
+            uId: user.id,
+            email: user.email,
+            expiresIn: parseInt(jwtConfig.expiresTime)*60*60*1000, //ms
             message: 'user found & logged in',
           };
           next();

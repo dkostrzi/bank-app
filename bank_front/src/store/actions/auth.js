@@ -8,12 +8,22 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, email,expires) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId: userId,
+    email: email,
+    expires:expires
   };
+};
+
+export const authFailed = (error) => {
+  return {
+    type: actionTypes.AUTH_FAIL,
+    error: error,
+  };
+
 };
 
 
@@ -28,8 +38,11 @@ export const auth = (login, password) => {
     axios.post(`${API_URL}/login`, authData)
       .then(res => {
         console.log(res.data);
+        const expirationDate = new Date(new Date().getTime() + res.data.expiresIn);
+        dispatch(authSuccess(res.data.token, res.data.uId, res.data.email,expirationDate));
+      }).catch(err => {
 
-        dispatch(authSuccess(res.data.token, res.data.userId));
-      });
+      dispatch(authFailed(err.response.data.error));
+    });
   };
 };
