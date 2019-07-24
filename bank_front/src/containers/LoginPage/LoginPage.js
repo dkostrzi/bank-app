@@ -7,7 +7,7 @@ import { API_URL } from '../../utils/api';
 import heroImg from '../../assets/images/bank-hero-nooverlay.png';
 import logoImg from '../../assets/images/logo.png';
 import { toastr } from 'react-redux-toastr';
-
+import Button from '../../components/Button/Button';
 import './LoginPage.scss';
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -28,7 +28,8 @@ class LoginPage extends Component {
     });
   };
 
-  auth = () => {
+  auth = (e) => {
+    e.preventDefault()
     console.log(this.props.isAuthenticated);
     this.props.onAuth(this.state.login, this.state.password);
 
@@ -74,16 +75,15 @@ class LoginPage extends Component {
             </div>
 
             <div className="login-form__form">
-
-              <input type="text" value={this.state.login} placeholder="Login"
-                     onChange={(event) => this.handleChangeInput(event, 'login')}/>
-              <input type="password" value={this.state.password} placeholder="Password"
-                     onChange={(event) => this.handleChangeInput(event, 'password')}/>
-              {errorsMessage}
-              <button className="waves-effect waves-light btn-large blue darken-1 btn-loading" onClick={this.auth}>
-                {loginBtn}
-              </button>
-              {/*<p> {this.state.login} | <span>{this.state.password}</span></p>*/}
+              <form onSubmit={this.auth}>
+                <input type="text" value={this.state.login} placeholder="Login"
+                       onChange={(event) => this.handleChangeInput(event, 'login')}/>
+                <input type="password" value={this.state.password} placeholder="Password"
+                       onChange={(event) => this.handleChangeInput(event, 'password')}/>
+                {errorsMessage}
+                <Button type="submit">{loginBtn}</Button>
+                {/*<p> {this.state.login} | <span>{this.state.password}</span></p>*/}
+              </form>
             </div>
             <div className="login-form__signup">
               <p>Don't have account? <span><Link to="/register">Sign up</Link></span></p>

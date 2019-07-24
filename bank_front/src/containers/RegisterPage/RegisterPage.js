@@ -3,6 +3,7 @@ import './RegisterPage.scss';
 import heroImg from '../../assets/images/bank-hero-nooverlay.png';
 import { Link } from 'react-router-dom';
 import { DatePicker } from 'react-materialize';
+import Button from '../../components/Button/Button';
 
 class RegisterPage extends Component {
 
@@ -71,7 +72,7 @@ class RegisterPage extends Component {
                 </div>
               </div>
               <div className="content__form__register-btn">
-                <button className="waves-effect waves-light btn-large blue darken-1">Register</button>
+                <Button>Register</Button>
               </div>
             </form>
           </div>
