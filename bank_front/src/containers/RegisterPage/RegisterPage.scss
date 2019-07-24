@@ -34,7 +34,8 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        span{
+
+        .error-message{
           color: red;
           font-size: 0.7rem;
         }

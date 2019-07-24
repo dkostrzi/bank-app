@@ -144,22 +144,22 @@ class RegisterPage extends Component {
         <form onSubmit={handleSubmit} className="content__form">
           <div className="content__form__form">
             <div className="content__form__form__account-info">
-              <input type="text" name="login" value={values.login} placeholder="Login"
+              <input type="text" name="login" className="error-message" value={values.login} placeholder="Login"
                      onChange={handleChange}/>
-              <ErrorMessage component="span" name="login"/>
+              <ErrorMessage component="span" className="error-message" name="login"/>
               <input type="password" name="password" value={values.password} placeholder="Password"
                      onChange={handleChange}/>
-              <ErrorMessage component="span" name="password"/>
+              <ErrorMessage component="span" className="error-message" name="password"/>
               <input type="text" name="email" value={values.email} placeholder="Email"
                      onChange={handleChange}/>
-              <ErrorMessage component="span" name="email"/>
+              <ErrorMessage component="span" className="error-message" name="email"/>
             </div>
             <div className="content__form__form__user-info">
               <input type="text" name="name" value={values.name} placeholder="Name" onChange={handleChange}/>
-              <ErrorMessage component="span" name="name"/>
+              <ErrorMessage component="span" className="error-message" name="name"/>
               <input type="text" name="surname" value={values.surname} placeholder="Surname"
                      onChange={handleChange}/>
-              <ErrorMessage component="span" name="surname"/>
+              <ErrorMessage component="span" className="error-message" name="surname"/>
               <DatePicker placeholder="Birthday" onChange={(date) => this.handleDate(date)} options={options}/>
             </div>
           </div>
