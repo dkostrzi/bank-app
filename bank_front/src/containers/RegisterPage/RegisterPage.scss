@@ -34,7 +34,13 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
+        span{
+          color: red;
+          font-size: 0.7rem;
+        }
+        input{
+          margin: 0;
+        }
         .input-field{
           margin: 0;
         }

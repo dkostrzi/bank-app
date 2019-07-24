@@ -6,7 +6,7 @@ const button = (props)=>{
   const style = styles.Button + ' waves-effect waves-light btn-large blue darken-1'
 
  return (
-   <button type={props.type} onClick={props.click} className={style}>{props.children}</button>
+   <button disabled={props.disabled} type={props.type} onClick={props.click} className={style}>{props.children}</button>
  )
 }
 

@@ -63,6 +63,8 @@ exports.registerMiddleware = (req, res, next) => {
         const data = {
           email: req.body.email,
           login: user.login,
+          name:req.body.name,
+          surname:req.body.surname
         };
         User.findOne({
           where: {
@@ -73,6 +75,8 @@ exports.registerMiddleware = (req, res, next) => {
             .update({
               email: data.email,
               login: data.login,
+              name:data.name,
+              surname:data.surname
             })
             .then(() => {
               req.data = data;
