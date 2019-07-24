@@ -8,15 +8,16 @@ import { connect } from 'react-redux';
 import HomePage from '../HomePage/HomePage';
 import Loading from '../../components/Loading/Loading';
 import ReduxToastr from 'react-redux-toastr'
+import RegisterPage from '../RegisterPage/RegisterPage';
 
 class App extends Component {
 
 
   componentDidMount() {
     this.props.tryAutoLogIn();
-    if (!this.props.isAuth) {
+    /*if (!this.props.isAuth) {
       this.props.history.replace('/login');
-    }
+    }*/
   }
 
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route path="/login" component={LoginPage}/>
+        <Route path="/register" component={RegisterPage}/>
         <Route path="/" exact component={HomePage}/>
       </Switch>
     );

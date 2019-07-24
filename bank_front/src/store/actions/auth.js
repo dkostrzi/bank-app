@@ -59,8 +59,14 @@ export const auth = (login, password) => {
 
         dispatch(authSuccess(res.data.token, res.data.uId, res.data.email,expirationDate));
       }).catch(err => {
+        console.log(err.response)
+      if(err.response){
+        dispatch(authFailed(err.response.data.error));
+      }
+      else{
+        dispatch(authFailed(err.response))
+      }
 
-      dispatch(authFailed(err.response.data.error));
     });
   };
 };

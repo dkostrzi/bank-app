@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
 import heroImg from '../../assets/images/bank-hero-nooverlay.png';
 import logoImg from '../../assets/images/logo.png';
-import {toastr} from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 
 import './LoginPage.scss';
 import Spinner from '../../components/Spinner/Spinner';
@@ -34,9 +34,9 @@ class LoginPage extends Component {
 
   };
 
-  showToastr = (message) =>{
+  showToastr = (message) => {
 
-  }
+  };
 
   render() {
     let authRedirect = null;
@@ -51,10 +51,11 @@ class LoginPage extends Component {
     ),url(${heroImg}) `,
     };
 
-    const loginBtn = this.props.auth.loading?<Spinner/>:"Login";
+    const loginBtn = this.props.auth.loading ? <Spinner/> : 'Login';
 
-    const errorsMessage = this.props.auth.error?<span style={{color:'red'}}>{this.props.auth.error}</span>:null;
+    const errorsMessage = this.props.auth.error ? <span style={{ color: 'red' }}>{this.props.auth.error}</span> : null;
 
+    //TODO: login container to form - enter will be work
     return (
       <>
 
@@ -71,11 +72,12 @@ class LoginPage extends Component {
             <div className="login-form__logo">
               <img src={logoImg} alt="logo"/>
             </div>
+
             <div className="login-form__form">
 
-              <input type="text" value={this.state.login} placeholder="login"
+              <input type="text" value={this.state.login} placeholder="Login"
                      onChange={(event) => this.handleChangeInput(event, 'login')}/>
-              <input type="password" value={this.state.password} placeholder="password"
+              <input type="password" value={this.state.password} placeholder="Password"
                      onChange={(event) => this.handleChangeInput(event, 'password')}/>
               {errorsMessage}
               <button className="waves-effect waves-light btn-large blue darken-1 btn-loading" onClick={this.auth}>
@@ -84,7 +86,7 @@ class LoginPage extends Component {
               {/*<p> {this.state.login} | <span>{this.state.password}</span></p>*/}
             </div>
             <div className="login-form__signup">
-              <p>Don't have account? <span>Sign up</span></p>
+              <p>Don't have account? <span><Link to="/register">Sign up</Link></span></p>
             </div>
 
 
