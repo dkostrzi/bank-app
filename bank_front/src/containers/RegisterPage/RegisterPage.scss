@@ -51,6 +51,12 @@
         }
       }
 
+      &__error{
+        text-align: center;
+        font-size: 0.8rem;
+        color: red;
+      }
+
       &__register-btn{
         margin-top: 50px;
         display: flex;
@@ -59,6 +65,12 @@
           width: 100%;
         }
       }
+    }
+
+    .new-user-info{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
     }
   }
 

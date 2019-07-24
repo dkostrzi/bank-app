@@ -54,10 +54,11 @@ exports.registerMiddleware = (req, res, next) => {
   passport.authenticate('register', (err, user, info) => {
     if (err) {
       console.log(err);
+      res.status(401).json({ success: false, error: err });
     }
     if (info != undefined) {
       console.log(info.message);
-      res.send(info.message);
+      res.status(422).json({ success: false, error: info.message });
     } else {
       req.logIn(user, err => {
         const data = {
