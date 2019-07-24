@@ -35,8 +35,12 @@
         flex-direction: row;
         justify-content: space-between;
 
+        .input-field{
+          margin: 0;
+        }
+
         &__user-info,&__account-info{
-          width: 40%;
+          width: 45%;
 
         }
       }
