@@ -5,6 +5,7 @@ import Button from '../../../components/Button/Button';
 
 const registerForm = props => {
 
+  //TODO: better form validation - login only numbers & strong password
   const options = {
     minDate: new Date(1980, 1, 1),
     yearRange: 80,
