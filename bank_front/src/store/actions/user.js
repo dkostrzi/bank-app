@@ -17,6 +17,12 @@ export const gettingUserInfoSuccess = (user, bill) => {
   };
 };
 
+export const logoutUserInfo = ()=>{
+  return{
+    type:actionTypes.LOGOUT_USER_INFO
+  }
+}
+
 
 export const getUserInfo = (token) => {
   return dispatch => {

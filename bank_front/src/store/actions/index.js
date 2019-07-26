@@ -6,5 +6,6 @@ export{
 } from './auth'
 
 export {
-  getUserInfo
+  getUserInfo,
+  logoutUserInfo
 } from './user'

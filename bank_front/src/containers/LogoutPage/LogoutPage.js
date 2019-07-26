@@ -7,6 +7,7 @@ class LogoutPage extends Component {
     super(props);
 
     this.props.onLogout();
+    this.props.onLogoutUserInfo();
 
 
   }
@@ -23,7 +24,8 @@ class LogoutPage extends Component {
 
 const mapDispatchToProps = dispatch =>{
   return{
-    onLogout: ()=>dispatch(actions.logout())
+    onLogout: ()=>dispatch(actions.logout()),
+    onLogoutUserInfo: ()=>dispatch(actions.logoutUserInfo())
   }
 };
 

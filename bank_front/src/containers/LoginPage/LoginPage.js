@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
-import heroImg from '../../assets/images/bank-hero-nooverlay.png';
+import heroImg from '../../assets/images/bank-hero-nooverlay.jpg';
 import logoImg from '../../assets/images/logo.png';
 import { toastr } from 'react-redux-toastr';
 import Button from '../../components/Button/Button';

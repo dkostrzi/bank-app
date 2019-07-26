@@ -86,6 +86,8 @@ const mapStateToProps = state => {
     isAuth: state.auth.token,
     isLoading: state.auth.loading,
     isLoadingUser: state.user.loading,
+    isUserInfo:state.user.user.id!==null
+
   };
 };
 

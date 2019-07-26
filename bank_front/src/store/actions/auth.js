@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
 import { toastr } from 'react-redux-toastr';
-import {getUserInfo} from './user';
+import {getUserInfo,logoutUserInfo} from './user';
 
 export const authStart = () => {
   return {
@@ -35,6 +35,7 @@ export const logout = () => {
   localStorage.removeItem('expirationDate');
   localStorage.removeItem('userId');
   localStorage.removeItem('email');
+
   return {
     type: actionTypes.AUTH_LOGOUT
   }
