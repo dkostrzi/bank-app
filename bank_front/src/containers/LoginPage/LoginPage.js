@@ -10,6 +10,7 @@ import { toastr } from 'react-redux-toastr';
 import Button from '../../components/Button/Button';
 import './LoginPage.scss';
 import Spinner from '../../components/Spinner/Spinner';
+import Logo from '../../components/Logo/Logo';
 
 class LoginPage extends Component {
 
@@ -29,7 +30,7 @@ class LoginPage extends Component {
   };
 
   auth = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log(this.props.isAuthenticated);
     this.props.onAuth(this.state.login, this.state.password);
 
@@ -41,7 +42,7 @@ class LoginPage extends Component {
 
   render() {
     let authRedirect = null;
-    if (this.props.isAuthenticated) {
+    if (this.props.isAuthenticated && this.props.isUserInfo) {
       authRedirect = <Redirect to="/"/>;
     }
 
@@ -52,7 +53,13 @@ class LoginPage extends Component {
     ),url(${heroImg}) `,
     };
 
-    const loginBtn = this.props.auth.loading ? <Spinner/> : 'Login';
+    let loginBtn = 'Login';
+    if (this.props.auth.loading || this.props.userLoading) {
+      loginBtn = <Spinner/>;
+    } else {
+      loginBtn = 'Login';
+    }
+
 
     const errorsMessage = this.props.auth.error ? <span style={{ color: 'red' }}>{this.props.auth.error}</span> : null;
 
@@ -71,7 +78,7 @@ class LoginPage extends Component {
           </div>
           <div className="login-form">
             <div className="login-form__logo">
-              <img src={logoImg} alt="logo"/>
+              <Logo/>
             </div>
 
             <div className="login-form__form">
@@ -103,6 +110,8 @@ const mapStateToProps = state => {
       isAuthenticated: state.auth.token !== null,
       userId: state.auth.email,
       auth: state.auth,
+      userLoading: state.user.loading,
+      isUserInfo: state.user.user.id,
     };
   }
 ;

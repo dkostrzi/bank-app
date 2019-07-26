@@ -5,14 +5,8 @@
   height: 100%;
   flex-direction: row;
 
-  &__navigation {
-    width: 25%;
-    height: 100%;
-    background: $bank-primary-blue;
-  }
-
   &__container {
-    width: 75%;
+    width: 80%;
 
 
     &__top-bar {
@@ -22,10 +16,41 @@
     }
 
     &__account-balance {
-      height: calc(20% - 20px);
+      @include bank-shadow;
+      height: calc(25% - 20px);
       margin: 10px;
       padding: 10px;
-      @include bank-shadow
+      display: flex;
+      justify-content: space-between;
+
+      &__bill{
+        .title{
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        .bill{
+          text-align: center;
+          font-size: 1.4rem ;
+          margin-top: 10px;
+        }
+        .email{
+          font-size: 0.8rem;
+          margin-top: 10px;
+        }
+      }
+
+      &__funds{
+        .title{
+          font-size: 0.9rem;
+          font-weight: 600;
+        }
+        .balance{
+          font-size: 3rem;
+          font-weight: 800;
+          color: $bank-primary-blue;
+        }
+      }
+
     }
 
     &__overview{
@@ -36,7 +61,7 @@
     &__additionals{
       @include bank-shadow;
       margin: 10px;
-      height: calc(30% - 10px);
+      height: calc(25% - 10px);
     }
 
   }

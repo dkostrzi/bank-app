@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
+
 import { API_URL } from '../../utils/api';
 import './HomePage.scss';
+
+import logoImg from '../../assets/images/logo.png';
+import { NavLink } from 'react-router-dom';
+import Nav from '../../components/Nav/Nav';
 
 class HomePage extends Component {
 
@@ -14,32 +22,13 @@ class HomePage extends Component {
     //TODO: checking if tokes expired
   }
 
-  state = {
-    availableFunds: null,
-  };
 
   componentDidMount() {
     this._isMounted = true;
     //TODO: better component redirect auth
-    if (this.token != null) {
-
-      axios.get(`${API_URL}/bill`, {
-        headers: {
-          Authorization: `JWT ${localStorage.getItem('token')}`,
-        },
-
-      })
-        .then(res => {
-          console.log(res.data);
-          if (this._isMounted) {
-            this.setState({
-              availableFunds: res.data.available_funds,
-            });
-          }
-
-        });
-    } else {
+    if (this.token == null) {
       this.props.history.replace('/login');
+
     }
 
 
@@ -51,30 +40,43 @@ class HomePage extends Component {
 
 
   render() {
+
+    const billBalance = this.props.bill.available_funds.toFixed(2);
+
     return (
       <>
-        <div className="HomePage">
-          <nav className="HomePage__navigation">
-            navigation
-          </nav>
-          <div className="HomePage__container">
-            <div className="HomePage__container__top-bar">
-              top bar
-            </div>
-            <div className="HomePage__container__account-balance">
-                account balance
-            </div>
-            <div className="HomePage__container__overview">
-              account overview - some funds charts
-            </div>
-            <div className="HomePage__container__additionals">
-              additionals
-            </div>
+
+        <div className="HomePage__container__account-balance">
+          <div className="HomePage__container__account-balance__bill">
+            <p className="title">Bill</p>
+            <p className="bill">{this.props.bill.account_bill}</p>
+            <p className="email">{this.props.user.email}</p>
           </div>
+          <div className="HomePage__container__account-balance__funds">
+            <p className="title">Balance</p>
+            <p className="balance">$ {billBalance}</p>
+          </div>
+        {/*  <div className="HomePage__container__account-balance__budget">
+            budget
+          </div>*/}
         </div>
+        <div className="HomePage__container__overview">
+          account overview - some funds charts
+        </div>
+        <div className="HomePage__container__additionals">
+          additionals
+        </div>
+
       </>
     );
   }
 }
 
-export default HomePage;
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+    bill: state.user.bill,
+  };
+};
+
+export default connect(mapStateToProps, null)(HomePage);

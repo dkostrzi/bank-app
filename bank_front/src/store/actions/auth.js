@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
 import { toastr } from 'react-redux-toastr';
+import {getUserInfo} from './user';
 
 export const authStart = () => {
   return {
@@ -10,6 +11,7 @@ export const authStart = () => {
 };
 
 export const authSuccess = (token, userId, email,expires) => {
+
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
@@ -58,6 +60,9 @@ export const auth = (login, password) => {
         localStorage.setItem('userId', res.data.uId);
 
         dispatch(authSuccess(res.data.token, res.data.uId, res.data.email,expirationDate));
+        dispatch(getUserInfo(res.data.token));
+
+
       }).catch(err => {
         console.log(err.response)
       if(err.response){
@@ -85,6 +90,7 @@ export const authCheckState = () => {
         const userId = localStorage.getItem('userId');
         const email = localStorage.getItem('email');
         dispatch(authSuccess(token, userId,email,expirationDate));
+        dispatch(getUserInfo(token));
        // dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime())/ 1000) )
       }
 
