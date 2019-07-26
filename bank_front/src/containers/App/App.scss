@@ -1,6 +1,23 @@
+@import "../../assets/styles/variables";
+
 .App {
     width: 100%;
     height: calc(100vh - 1px);
 
 
+    &__dashboard{
+        display: flex;
+        height: 100%;
+        flex-direction: row;
+
+        &__container{
+            width: 80%;
+            &__top-bar {
+                background: $bank-primary-blue-second;
+                background: $bank-primary-blue-gradient;
+                height: 10%;
+            }
+        }
+
+    }
 }

@@ -47,10 +47,10 @@ class App extends Component {
     if (this.props.isAuth) {
       layout = (
         <div className="App">
-          <div className="HomePage">
+          <div className="App__dashboard">
             <Nav/>
-            <div className="HomePage__container">
-              <div className="HomePage__container__top-bar">
+            <div className="App__dashboard__container">
+              <div className="App__dashboard__container__top-bar">
 
               </div>
               {routes}

@@ -46,27 +46,28 @@ class HomePage extends Component {
     return (
       <>
 
-        <div className="HomePage__container__account-balance">
-          <div className="HomePage__container__account-balance__bill">
-            <p className="title">Bill</p>
-            <p className="bill">{this.props.bill.account_bill}</p>
-            <p className="email">{this.props.user.email}</p>
-          </div>
-          <div className="HomePage__container__account-balance__funds">
-            <p className="title">Balance</p>
-            <p className="balance">$ {billBalance}</p>
-          </div>
-        {/*  <div className="HomePage__container__account-balance__budget">
+        <div className="HomeDashboard">
+          <div className="HomeDashboard__account-balance">
+            <div className="HomeDashboard__account-balance__bill">
+              <p className="title">Bill</p>
+              <p className="bill">{this.props.bill.account_bill}</p>
+              <p className="email">{this.props.user.email}</p>
+            </div>
+            <div className="HomeDashboard__account-balance__funds">
+              <p className="title">Balance</p>
+              <p className="balance">$ {billBalance}</p>
+            </div>
+            {/*  <div className="HomePage__container__account-balance__budget">
             budget
           </div>*/}
+          </div>
+          <div className="HomeDashboard__overview">
+            account overview - some funds charts
+          </div>
+          <div className="HomeDashboard__additionals">
+            additionals
+          </div>
         </div>
-        <div className="HomePage__container__overview">
-          account overview - some funds charts
-        </div>
-        <div className="HomePage__container__additionals">
-          additionals
-        </div>
-
       </>
     );
   }
