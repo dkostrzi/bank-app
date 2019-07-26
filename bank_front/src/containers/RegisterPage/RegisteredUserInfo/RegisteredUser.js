@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const registeredUser = props => {
 
-  //TODO: better styling 
+  //TODO: better styling
   return (
     <div className="new-user-info">
       <h3>User registered successfully</h3>

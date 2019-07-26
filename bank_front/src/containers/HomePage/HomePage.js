@@ -10,6 +10,8 @@ class HomePage extends Component {
     this.uId = localStorage.getItem('email');
     this._isMounted = false;
     this.token = localStorage.getItem('token');
+
+    //TODO: checking if tokes expired
   }
 
   state = {
