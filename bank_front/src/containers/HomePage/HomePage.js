@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
-import styles from './HomePage.module.scss';
+import './HomePage.scss';
 
 class HomePage extends Component {
 
@@ -53,8 +53,24 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        <div className={styles.HomePage}>
-          HomePage
+        <div className="HomePage">
+          <nav className="HomePage__navigation">
+            navigation
+          </nav>
+          <div className="HomePage__container">
+            <div className="HomePage__container__top-bar">
+              top bar
+            </div>
+            <div className="HomePage__container__account-balance">
+                account balance
+            </div>
+            <div className="HomePage__container__overview">
+              account overview - some funds charts
+            </div>
+            <div className="HomePage__container__additionals">
+              additionals
+            </div>
+          </div>
         </div>
       </>
     );
