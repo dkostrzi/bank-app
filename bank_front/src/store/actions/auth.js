@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 import { API_URL } from '../../utils/api';
 import { toastr } from 'react-redux-toastr';
-import {getUserInfo,logoutUserInfo} from './user';
+import {getUserInfo} from './user';
 
 export const authStart = () => {
   return {

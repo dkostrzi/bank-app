@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter, Redirect, Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
-import axios from 'axios';
-import { API_URL } from '../../utils/api';
 import heroImg from '../../assets/images/bank-hero-nooverlay.jpg';
-import logoImg from '../../assets/images/logo.png';
-import { toastr } from 'react-redux-toastr';
 import Button from '../../components/Button/Button';
 import './LoginPage.scss';
 import Spinner from '../../components/Spinner/Spinner';
@@ -36,9 +32,6 @@ class LoginPage extends Component {
 
   };
 
-  showToastr = (message) => {
-
-  };
 
   render() {
     let authRedirect = null;

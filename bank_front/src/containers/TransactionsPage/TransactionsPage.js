@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './TransactionsPage.scss';
 
-class TransactionsPage extends Component{
+class TransactionsPage extends Component {
 
   constructor(props) {
     super(props);
@@ -19,9 +21,12 @@ class TransactionsPage extends Component{
   }
 
   render() {
-    return(
-      <h3>Transakcja</h3>
-    )
+    return (
+      <div className="TransactionsDashboard">
+        
+      </div>
+    );
   }
 }
-export default TransactionsPage;
+
+export default connect(null,null)(TransactionsPage);

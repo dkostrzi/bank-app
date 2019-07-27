@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
 import './App.scss';
 import LoginPage from '../LoginPage/LoginPage';
 import * as actions from '../../store/actions';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomePage from '../HomePage/HomePage';
 import Loading from '../../components/Loading/Loading';
@@ -38,13 +37,9 @@ class App extends Component {
       </Switch>
     );
 
-    let layout = (
-      <div className="App">
-        {routes}
-      </div>
-    );
+    let layout = null;
 
-    if (this.props.isAuth) {
+    if (this.props.isAuth && this.props.isUserInfo) {
       layout = (
         <div className="App">
           <div className="App__dashboard">
@@ -56,6 +51,12 @@ class App extends Component {
               {routes}
             </div>
           </div>
+        </div>
+      );
+    } else {
+      layout = (
+        <div className="App">
+          {routes}
         </div>
       );
     }
@@ -86,7 +87,8 @@ const mapStateToProps = state => {
     isAuth: state.auth.token,
     isLoading: state.auth.loading,
     isLoadingUser: state.user.loading,
-    isUserInfo:state.user.user.id!==null
+    isUserInfo: state.user.user.id !== null,
+
 
   };
 };
