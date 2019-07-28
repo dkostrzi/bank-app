@@ -1,0 +1,7 @@
+.TransactionsDashboard{
+  padding: 50px;
+  &__data{
+    height: 400px;
+    overflow-y: scroll;
+  }
+}

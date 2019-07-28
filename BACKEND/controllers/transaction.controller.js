@@ -1,6 +1,8 @@
 /* eslint-disable */
-
+const Op = require('Sequelize').Op;
 const db = require('../config/db.config');
+const User = db.users;
+const Bill = db.bills;
 
 exports.registerTransaction = (req, res) => {
 
@@ -10,7 +12,7 @@ exports.registerTransaction = (req, res) => {
     const diff = (parseFloat(senderAvailableFunds) - parseFloat(money));
 
     if (diff < 0) {
-      throw new Error("Sender dosen't have enough funds");
+      throw new Error('Sender dosen\'t have enough funds');
 
     } else {
       db.bills.update(
@@ -59,7 +61,7 @@ exports.registerTransaction = (req, res) => {
                 id_recipient: recipientId,
                 date_time: new Date(),
                 amount_money: amountMoney,
-                authorization_key:generateKey(),
+                authorization_key: generateKey(),
                 transfer_title: transferTitle,
               });
               res.status(200).json({ success: true });
@@ -77,4 +79,46 @@ exports.registerTransaction = (req, res) => {
     res.status(401).json({ success: false, error: err });
   });
 
+};
+
+
+exports.getAllUserTransactions = (req, res) => {
+  const uId = req.decoded.id;
+  db.transactions.findAll({
+    where: {
+      [Op.or]: [{id_sender: uId}, {id_recipient: uId}]
+    },
+    include: [
+      {
+        model: User,
+        as: 'getSenderdata',
+        where: { id: db.Sequelize.col('transaction.id_sender') },
+        attributes: ['name', 'surname'],
+        include: [
+          {
+            model: Bill,
+            attributes: ['account_bill'],
+          },
+        ],
+      },
+      {
+        model: User,
+        as: 'getRecipientdata',
+        where: { id: db.Sequelize.col('transaction.id_sender') },
+        attributes: ['name', 'surname'],
+        include: [
+          {
+            model: Bill,
+            attributes: ['account_bill'],
+          },
+        ],
+      },
+    ]
+  })
+    .then(transactions=>{
+      res.status(200).json(transactions)
+    })
+    .catch(err=>{
+      res.status(401).json({ success: false, error: err });
+    })
 };
