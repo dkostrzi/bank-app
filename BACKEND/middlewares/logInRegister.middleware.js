@@ -84,7 +84,7 @@ exports.registerMiddleware = (req, res, next) => {
 
               Bill.create({
                 id_owner: user.id,
-                available_funds: 0,
+                available_funds: 10,
                 account_bill: getRandomInt(10000000000000000000000000, 99999999999999999999999999),
               });
               console.log('user created in db');

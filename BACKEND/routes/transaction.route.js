@@ -7,6 +7,11 @@ module.exports = app => {
     checkToken,
     transactionController.registerTransaction,
   );
+  app.post(
+    '/api/transaction/confirm',
+    checkToken,
+    transactionController.confirmTransaction,
+  );
 
   app.get('/api/transaction',checkToken,transactionController.getAllUserTransactions)
 };
