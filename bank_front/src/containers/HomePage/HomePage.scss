@@ -49,6 +49,12 @@
     @include bank-shadow;
     height: calc(45% - 20px);
     margin: 10px;
+    &__chart{
+      width: 70%;
+      .charts{
+        height: 100%;
+      }
+    }
   }
   &__additionals{
     @include bank-shadow;

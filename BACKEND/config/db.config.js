@@ -23,6 +23,29 @@ db.users = require('../models/user.model')(sequelize, Sequelize);
 db.bills = require('../models/bill.model')(sequelize, Sequelize);
 db.transactions = require('../models/transaction.model')(sequelize, Sequelize);
 
+db.users.hasMany(db.bills, { foreignKey: 'id_owner', sourceKey: 'id' });
+db.bills.belongsTo(db.users, { foreignKey: 'id_owner', targetKey: 'id' });
+
+
+db.users.hasMany(db.transactions, {
+  foreignKey: 'id_sender',
+  sourceKey: 'id',
+});
+db.transactions.belongsTo(db.users, {
+  as: 'getSenderdata',
+  foreignKey: 'id_sender',
+  targetKey: 'id',
+});
+db.users.hasMany(db.transactions, {
+  foreignKey: 'id_recipient',
+  sourceKey: 'id',
+});
+db.transactions.belongsTo(db.users, {
+  as: 'getRecipientdata',
+  foreignKey: 'id_recipient',
+  targetKey: 'id',
+});
+
 db.start = () => {
   //  console.log("USER ID",us.getId());
   const hash = bcrypt.hashSync(env.adminAccount.password, 10);

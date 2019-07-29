@@ -3,6 +3,7 @@ import axios from 'axios';
 import { API_URL } from '../../utils/api';
 import { toastr } from 'react-redux-toastr';
 import {getUserInfo} from './user';
+import {gettingTransactions} from './transaction';
 
 export const authStart = () => {
   return {
@@ -62,6 +63,7 @@ export const auth = (login, password) => {
 
         dispatch(authSuccess(res.data.token, res.data.uId, res.data.email,expirationDate));
         dispatch(getUserInfo(res.data.token));
+        dispatch(gettingTransactions(res.data.token,res.data.uId))
 
 
       }).catch(err => {
