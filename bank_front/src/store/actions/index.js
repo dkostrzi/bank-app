@@ -9,3 +9,8 @@ export {
   getUserInfo,
   logoutUserInfo
 } from './user'
+
+
+export {
+  gettingTransactions
+} from './transaction'

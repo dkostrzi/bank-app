@@ -1,5 +1,5 @@
 /* eslint-disable */
-const Op = require('Sequelize').Op;
+const Op = require('sequelize').Op;
 const db = require('../config/db.config');
 const User = db.users;
 const Bill = db.bills;

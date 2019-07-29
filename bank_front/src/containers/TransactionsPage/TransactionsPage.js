@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-
+import * as actions from '../../store/actions';
 import './TransactionsPage.scss';
 import { API_URL } from '../../utils/api';
+import { NavLink } from 'react-router-dom';
+import TransactionList from './TransactionList/TransactionList';
+import AddNewTransaction from './AddNewTransaction/AddNewTransaction';
 
 class TransactionsPage extends Component {
 
@@ -20,6 +23,14 @@ class TransactionsPage extends Component {
     incomes: [],
     expenses: [],
     transactions: [],
+    activePage: 'ADD_NEW_TRANSACTION',
+  };
+
+  changePage = (page) => {
+    this.setState({
+      ...this.state,
+      activePage: page,
+    });
   };
 
   componentDidMount() {
@@ -27,103 +38,47 @@ class TransactionsPage extends Component {
       this.props.history.replace('/login');
     }
 
-    axios.get(`${API_URL}/transaction`, {
-      headers: {
-        Authorization: `JWT ${this.token}`,
-      },
-    })
-      .then(res => {
-        console.log(res.data);
-        const incomes = res.data.filter(transaction => {
-          return transaction.id_recipient === this.uId;
-        });
-        const expenses = res.data.filter(transaction => {
-          return transaction.id_sender === this.uId;
-        });
-
-
-        console.log(incomes);
-        console.log(expenses);
-        this.setState({
-          incomes,
-          expenses,
-        });
-
-
-      });
+    this.props.onGettingTransaction(this.token, this.uId);
 
   }
 
   render() {
+
+    const activePage = this.state.activePage === 'TRANSACTION_LIST' ?
+      <TransactionList transaction={this.props.transaction}/> : <AddNewTransaction/>;
+
+
     return (
       <>
         {this.props.user.id ?
           <div className="TransactionsDashboard">
-            <div className="TransactionsDashboard__data">
-              <h3>Incomes</h3>
-              <table className="responsive-table highlight">
-                <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>id payer</th>
-                  <th>source bill</th>
-                  <th>date</th>
-                  <th>amount money</th>
-                  <th>transfer title</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {this.state.incomes.map(item => {
-                  return <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.getSenderdata.name} {item.getSenderdata.surname}</td>
-                    <td>{item.getSenderdata.bills[0].account_bill} </td>
-                    <td>{item.date_time}</td>
-                    <td>{item.amount_money}</td>
-                    <td>{item.transfer_title}</td>
-                  </tr>;
-                })}
-                </tbody>
-              </table>
-
-              <h3>Expenses</h3>
-              <table className="responsive-table highlight">
-                <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>id payer</th>
-                  <th>source bill</th>
-                  <th>date</th>
-                  <th>amount money</th>
-                  <th>transfer title</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {this.state.expenses.map(item => {
-                  return <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.getRecipientdata.name} {item.getRecipientdata.surname}</td>
-                    <td>{item.getRecipientdata.bills[0].account_bill} </td>
-                    <td>{item.date_time}</td>
-                    <td>{item.amount_money}</td>
-                    <td>{item.transfer_title}</td>
-                  </tr>;
-                })}
-                </tbody>
-              </table>
+            <div className="TransactionsDashboard__add-transaction">
+              <nav>
+                <ul>
+                  <li><a onClick={() => this.changePage('ADD_NEW_TRANSACTION')}>Add new transaction</a></li>
+                  <li><a onClick={() => this.changePage('TRANSACTION_LIST')}>Transaction list</a></li>
+                </ul>
+              </nav>
             </div>
+            {activePage}
           </div> : null}
       </>
     );
   }
 }
 
+
 const mapStateToProps = state => {
   return {
     user: state.user.user,
+    transaction: state.transaction,
   };
 };
 
-export default connect(mapStateToProps, null)(TransactionsPage);
+const mapDispatchToProps = dispatch => {
+  return {
+    onGettingTransaction: (token, uId) => dispatch(actions.gettingTransactions(token, uId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionsPage);

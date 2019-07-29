@@ -1,7 +1,22 @@
+@import "../../assets/styles/variables";
 .TransactionsDashboard{
-  padding: 50px;
+
+  &__add-transaction{
+    nav{
+      background-color:$bank-primary-blue ;
+      ul{
+        display: flex;
+        justify-content: space-around;
+        li{}
+
+      }
+    }
+
+  }
+
   &__data{
-    height: 400px;
+    padding: 50px;
+    height:500px;
     overflow-y: scroll;
   }
 }
