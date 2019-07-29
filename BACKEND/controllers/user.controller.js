@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 const helpers = require('../helpers/db.helper');
-const getRandomInt = require('../helpers/helpersfunction.helper');
+const getRandomInt = require('../helpers/helpersfunction.helper').getRandomInt;
 const { jwtOptions } = require('../config/jwt.config');
 const bcrypt = require('bcrypt');
 const db = require('../config/db.config');
@@ -25,5 +25,34 @@ exports.loginUser = (req, res) => {
 
   res.status(200).json(req.loginInfo);
 };
+
+exports.getUserInfo = (req,res) =>{
+  const uId = req.decoded.id;
+
+  db.users.findOne({
+    where:{
+      id:uId
+    }
+  })
+    .then(user=>{
+      db.bills.findOne({
+        where:{
+          id_owner:uId
+        }
+      }).then(bill=>{
+
+        const result = {
+          user:user,
+          bill:bill
+        };
+
+        res.status(200).json(result)
+      })
+
+    })
+
+
+
+}
 
 

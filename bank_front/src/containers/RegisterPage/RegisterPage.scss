@@ -1,0 +1,87 @@
+.RegisterPage {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  .header{
+    height: 20%;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h1{
+      color: #fff;
+      font-size: 2.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+  }
+
+  .content{
+    padding-top: 50px;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+
+    &__form{
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+
+      &__form{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .error-message{
+          color: red;
+          font-size: 0.7rem;
+        }
+        input{
+          margin: 0;
+        }
+        .input-field{
+          margin: 0;
+        }
+
+        &__user-info,&__account-info{
+          width: 45%;
+
+        }
+      }
+
+      &__error{
+        text-align: center;
+        font-size: 0.8rem;
+        color: red;
+      }
+
+      &__register-btn{
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        button{
+          width: 100%;
+        }
+      }
+    }
+
+    .new-user-info{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+  }
+
+  footer{
+    padding: 20px 0;
+    text-align: center;
+
+    span{
+      font-weight: 800;
+    }
+  }
+
+}
