@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
-import './App.css';
+import './App.scss';
 import LoginPage from '../LoginPage/LoginPage';
 import * as actions from '../../store/actions';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomePage from '../HomePage/HomePage';
 import Loading from '../../components/Loading/Loading';
-import ReduxToastr from 'react-redux-toastr'
+import ReduxToastr from 'react-redux-toastr';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Nav from '../../components/Nav/Nav';
+import TransactionsPage from '../TransactionsPage/TransactionsPage';
+import NotFound from '../NotFoundPage/NotFound';
+import LogoutPage from '../LogoutPage/LogoutPage';
 
 class App extends Component {
 
@@ -28,10 +31,37 @@ class App extends Component {
         <Route path="/login" component={LoginPage}/>
         <Route path="/register" component={RegisterPage}/>
         <Route path="/" exact component={HomePage}/>
+        <Route path="/transactions" exact component={TransactionsPage}/>
+        <Route path="/logout" exact component={LogoutPage}/>
+        <Route path="*" exact component={NotFound}/>
       </Switch>
     );
 
-    const loading = this.props.isLoading? <Loading/>:null;
+    let layout = null;
+
+    if (this.props.isAuth && this.props.isUserInfo) {
+      layout = (
+        <div className="App">
+          <div className="App__dashboard">
+            <Nav/>
+            <div className="App__dashboard__container">
+              <div className="App__dashboard__container__top-bar">
+
+              </div>
+              {routes}
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      layout = (
+        <div className="App">
+          {routes}
+        </div>
+      );
+    }
+
+    const loading = this.props.isLoading || this.props.isLoadingUser ? <Loading/> : null;
 
     return (
       <>
@@ -45,9 +75,7 @@ class App extends Component {
           transitionOut="fadeOut"
 
           closeOnToastrClick/>
-        <div className="App">
-          {routes}
-        </div>
+        {layout}
       </>
     );
   }
@@ -57,7 +85,11 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     isAuth: state.auth.token,
-    isLoading:state.auth.loading
+    isLoading: state.auth.loading,
+    isLoadingUser: state.user.loading,
+    isUserInfo: state.user.user.id !== null,
+
+
   };
 };
 

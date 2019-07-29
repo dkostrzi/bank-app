@@ -5,6 +5,7 @@ exports.getLoggedUserBill = (req, res) => {
   db.bills
     .findOne({
       where: {
+
         id_owner: uId,
       },
     })

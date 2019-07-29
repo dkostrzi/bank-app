@@ -14,6 +14,8 @@ module.exports = app => {
 
   app.get('/api/token',checkToken,userController.getTokenInfo);
 
+  app.get('/api/user',checkToken,userController.getUserInfo);
+
   //app.post('/api/register', auth.optional, userController.registerUser);
   app.post('/api/register',registerMiddleware , userController.registerUser);
   //app.post('/api/login', auth.optional, userController.loginUser);
