@@ -47,6 +47,7 @@ class AddNewTransaction extends Component {
             ...this.state,
             activePage:"SUCCESS_TRANSACTION_AUTHORIZED"
           })
+          this.props.getTransactions();
         }
       }).catch(err => {
       console.log(err);

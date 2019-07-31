@@ -78,7 +78,7 @@ class HomePage extends Component {
       }
       xAxis.push(new Date(item.date_time).toDateString());
     });
-    amountMoney.push(startingFunds);
+    amountMoney.push(startingFunds.toFixed(2));
 
     transactions.map(item => {
       if (item.id_sender == this.uId) {

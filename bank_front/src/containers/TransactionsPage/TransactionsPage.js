@@ -37,15 +37,19 @@ class TransactionsPage extends Component {
     if (this.token == null) {
       this.props.history.replace('/login');
     }
+    this.getTransactions();
 
-   // this.props.onGettingTransaction(this.token, this.uId);
 
   }
+
+  getTransactions = () =>{
+    this.props.onGettingTransaction(this.token, this.uId);
+  };
 
   render() {
 
     const activePage = this.state.activePage === 'TRANSACTION_LIST' ?
-      <TransactionList transaction={this.props.transaction}/> : <AddNewTransaction/>;
+      <TransactionList transaction={this.props.transaction}/> : <AddNewTransaction getTransactions={this.getTransactions}/>;
 
 
     return (

@@ -94,6 +94,7 @@ export const authCheckState = () => {
         const email = localStorage.getItem('email');
         dispatch(authSuccess(token, userId,email,expirationDate));
         dispatch(getUserInfo(token));
+        //dispatch(gettingTransactions(token,userId));
        // dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime())/ 1000) )
       }
 
