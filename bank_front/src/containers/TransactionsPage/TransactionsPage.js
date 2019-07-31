@@ -38,7 +38,7 @@ class TransactionsPage extends Component {
       this.props.history.replace('/login');
     }
 
-    this.props.onGettingTransaction(this.token, this.uId);
+   // this.props.onGettingTransaction(this.token, this.uId);
 
   }
 

@@ -5,7 +5,7 @@ import { API_URL } from '../../utils/api';
 
 export const homePageStart = () => {
   return {
-    type: actionTypes.HOMEPAGE_START,
+    type: actionTypes.GETTING_USERINFO_START,
   };
 };
 

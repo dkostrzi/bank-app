@@ -77,7 +77,7 @@ const logoutUserInfo = (state,action)=>{
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.HOMEPAGE_START:
+    case actionTypes.GETTING_USERINFO_START:
       return homePageStart(state, action);
     case actionTypes.GETTING_USER_SUCCESS:
       return gettingUserSuccess(state,action);

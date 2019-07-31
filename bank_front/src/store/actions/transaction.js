@@ -36,7 +36,7 @@ export const gettingTransactions = (token,uId) => {
           return transaction.id_sender === uId;
         });
 
-        dispatch(gettingTransactionsSuccess(incomes,expenses))
+        dispatch(gettingTransactionsSuccess(incomes,expenses));
         dispatch(getUserInfo(token))
 
 
