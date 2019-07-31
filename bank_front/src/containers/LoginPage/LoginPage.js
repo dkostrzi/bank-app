@@ -35,7 +35,7 @@ class LoginPage extends Component {
 
   render() {
     let authRedirect = null;
-    if (this.props.isAuthenticated && this.props.isUserInfo) {
+    if (this.props.isAuthenticated && this.props.isUserInfo && this.props.isTransactions) {
       authRedirect = <Redirect to="/"/>;
     }
 
@@ -105,6 +105,7 @@ const mapStateToProps = state => {
       auth: state.auth,
       userLoading: state.user.loading,
       isUserInfo: state.user.user.id,
+      isTransactions:state.user.transactionsLoaded
     };
   }
 ;

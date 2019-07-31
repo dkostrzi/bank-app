@@ -62,8 +62,8 @@ export const auth = (login, password) => {
         localStorage.setItem('userId', res.data.uId);
 
         dispatch(authSuccess(res.data.token, res.data.uId, res.data.email,expirationDate));
-        dispatch(getUserInfo(res.data.token));
-        dispatch(gettingTransactions(res.data.token,res.data.uId))
+        dispatch(getUserInfo(res.data.token,res.data.uId));
+       // dispatch(gettingTransactions(res.data.token,res.data.uId))
 
 
       }).catch(err => {
@@ -93,7 +93,7 @@ export const authCheckState = () => {
         const userId = localStorage.getItem('userId');
         const email = localStorage.getItem('email');
         dispatch(authSuccess(token, userId,email,expirationDate));
-        dispatch(getUserInfo(token));
+        dispatch(getUserInfo(token,userId));
         //dispatch(gettingTransactions(token,userId));
        // dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime())/ 1000) )
       }

@@ -23,7 +23,7 @@ class TransactionsPage extends Component {
     incomes: [],
     expenses: [],
     transactions: [],
-    activePage: 'ADD_NEW_TRANSACTION',
+    activePage: 'TRANSACTION_LIST',
   };
 
   changePage = (page) => {
@@ -37,19 +37,19 @@ class TransactionsPage extends Component {
     if (this.token == null) {
       this.props.history.replace('/login');
     }
-    this.getTransactions();
+    this.updateTransactionsData();
 
 
   }
 
-  getTransactions = () =>{
-    this.props.onGettingTransaction(this.token, this.uId);
+  updateTransactionsData = () =>{
+    this.props.onUpdateTransactionData(this.token, this.uId);
   };
 
   render() {
 
     const activePage = this.state.activePage === 'TRANSACTION_LIST' ?
-      <TransactionList transaction={this.props.transaction}/> : <AddNewTransaction getTransactions={this.getTransactions}/>;
+      <TransactionList transaction={this.props.transaction}/> : <AddNewTransaction getTransactions={this.updateTransactionsData}/>;
 
 
     return (
@@ -75,13 +75,14 @@ class TransactionsPage extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user.user,
-    transaction: state.transaction,
+    transaction: state.user.transactions,
+    isTransactionsLoaded:state.user.transactionsLoaded
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGettingTransaction: (token, uId) => dispatch(actions.gettingTransactions(token, uId)),
+    onUpdateTransactionData: (token, uId) => dispatch(actions.getUserInfo(token, uId)),
   };
 };
 

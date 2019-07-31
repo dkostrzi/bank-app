@@ -20,7 +20,7 @@ const composeEnhancers = process.env.NODE_ENV ==='development'? window.__REDUX_D
 const rootReducer = combineReducers({
   auth:authReducer,
   user:userReducer,
-  transaction:transactionReducer,
+  //transaction:transactionReducer,
   toastr: toastrReducer // <- Mounted at toastr.
 });
 

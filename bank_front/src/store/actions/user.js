@@ -24,7 +24,7 @@ export const logoutUserInfo = ()=>{
 }
 
 
-export const getUserInfo = (token) => {
+export const getUserInfo = (token,uId) => {
   return dispatch => {
     dispatch(homePageStart());
 
@@ -35,7 +35,65 @@ export const getUserInfo = (token) => {
       },
     })
       .then(res=>{
+        //const {user,bill} = res.data;
+        dispatch(gettingTransactions(token,uId));
         dispatch(gettingUserInfoSuccess(res.data.user, res.data.bill))
       })
   };
+};
+
+
+
+const gettingTransactionsStart = () => {
+  return {
+    type: actionTypes.GETTING_TRANSACTIONS_START,
+  };
+};
+
+const gettingTransactionsSuccess = (incomes, expenses,all) => {
+  return{
+    type:actionTypes.GETTING_TRANSACTIONS_SUCCESS,
+    incomes:incomes,
+    expenses:expenses,
+    transactions:all
+  }
+};
+
+const gettingTransactionsFailed = (error) => {
+  return{
+    type:actionTypes.GETTING_TRANSACTIONS_FAILED,
+    error:error
+  }
+};
+
+export const gettingTransactions = (token,uId) => {
+  return dispatch =>{
+
+    dispatch(gettingTransactionsStart());
+
+    axios.get(`${API_URL}/transaction`, {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    })
+      .then(res => {
+        console.log(res.data);
+        const incomes = res.data.filter(transaction => {
+          return transaction.id_recipient === uId;
+        });
+        const expenses = res.data.filter(transaction => {
+          return transaction.id_sender === uId;
+        });
+
+        dispatch(gettingTransactionsSuccess(incomes,expenses,res.data));
+
+
+
+      })
+      .catch(err=>{
+        console.log(err)
+        dispatch(gettingTransactionsFailed(err.response.data))
+      });
+  }
+
 };

@@ -23,6 +23,8 @@ const initialState = {
     id_owner: null,
     updatedAt: null,
   },
+  transactions:[],
+  transactionsLoaded:false,
   error:null,
   loading: false,
 };
@@ -75,6 +77,32 @@ const logoutUserInfo = (state,action)=>{
 }
 
 
+
+const gettingTransactionsStart = (state, action) => {
+  return {
+    ...state,
+    loading: true,
+  };
+};
+
+const gettingTransactionsSuccess = (state,action)=>{
+  return{
+    ...state,
+    transactions:action.transactions,
+    loading:false,
+    transactionsLoaded:true
+  }
+};
+
+const gettinTransactionFailed = (state,action)=>{
+  return{
+    ...state,
+    loading:false,
+    transactionsLoaded:true,
+    error:action.error
+  }
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GETTING_USERINFO_START:
@@ -83,6 +111,12 @@ const reducer = (state = initialState, action) => {
       return gettingUserSuccess(state,action);
     case actionTypes.LOGOUT_USER_INFO:
       return logoutUserInfo(state,action);
+    case actionTypes.GETTING_TRANSACTIONS_START:
+      return gettingTransactionsStart(state,action);
+    case actionTypes.GETTING_TRANSACTIONS_SUCCESS:
+      return gettingTransactionsSuccess(state,action);
+    case actionTypes.GETTING_TRANSACTIONS_FAILED:
+      return gettinTransactionFailed(state,action);
     default:
       return state;
   }

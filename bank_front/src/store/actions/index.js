@@ -7,10 +7,11 @@ export{
 
 export {
   getUserInfo,
-  logoutUserInfo
+  logoutUserInfo,
+  gettingTransactions,
 } from './user'
 
 
 export {
-  gettingTransactions
+
 } from './transaction'

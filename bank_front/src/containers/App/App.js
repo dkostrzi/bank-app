@@ -12,6 +12,8 @@ import Nav from '../../components/Nav/Nav';
 import TransactionsPage from '../TransactionsPage/TransactionsPage';
 import NotFound from '../NotFoundPage/NotFound';
 import LogoutPage from '../LogoutPage/LogoutPage';
+import PrivateRoute from '../privateRoute';
+import Spinner from '../../components/Spinner/Spinner';
 
 class App extends Component {
 
@@ -30,8 +32,8 @@ class App extends Component {
       <Switch>
         <Route path="/login" component={LoginPage}/>
         <Route path="/register" component={RegisterPage}/>
-        <Route path="/" exact component={HomePage}/>
-        <Route path="/transactions" exact component={TransactionsPage}/>
+        <PrivateRoute path="/" exact component={HomePage}/>
+        <PrivateRoute path="/transactions" exact component={TransactionsPage}/>
         <Route path="/logout" exact component={LogoutPage}/>
         <Route path="*" exact component={NotFound}/>
       </Switch>
@@ -39,7 +41,14 @@ class App extends Component {
 
     let layout = null;
 
-    if (this.props.isAuth && this.props.isUserInfo) {
+    if(!this.props.isAuth){
+      layout = (
+        <div className="App">
+          {routes}
+        </div>
+      );
+    }
+    else if(this.props.isAuth && this.props.isUserInfo && this.props.isTransactions){
       layout = (
         <div className="App">
           <div className="App__dashboard">
@@ -53,15 +62,22 @@ class App extends Component {
           </div>
         </div>
       );
-    } else {
+    }
+    else{
       layout = (
-        <div className="App">
-          {routes}
-        </div>
-      );
+        <Spinner/>
+      )
     }
 
-    const loading = this.props.isLoading || this.props.isLoadingUser || this.props.isLoadingTransactions ? <Loading/> : null;
+   /* if (this.props.isAuth && this.props.isUserInfo && this.props.isTransactions) {
+
+    } else if(!this.props.isAuth && !this.props.isUserInfo && !this.props.isTransactions) {
+
+    }else{
+      layout = null;
+    }*/
+
+    const loading = this.props.isLoading || this.props.isLoadingUser  ? <Loading/> : null;
 
     return (
       <>
@@ -87,7 +103,8 @@ const mapStateToProps = state => {
     isAuth: state.auth.token,
     isLoading: state.auth.loading,
     isLoadingUser: state.user.loading,
-    isLoadingTransactions:state.transaction.loading,
+    isTransactions:state.user.transactionsLoaded,
+   // isLoadingTransactions:state.transaction.loading,
     isUserInfo: state.user.user.id !== null,
 
 

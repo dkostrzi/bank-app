@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './HomePage.scss';
 import ReactApexCharts from 'react-apexcharts';
 import * as actions from '../../store/actions';
+import { Redirect } from 'react-router-dom';
 
 
 class HomePage extends Component {
@@ -42,25 +43,30 @@ class HomePage extends Component {
       },
       series: [{
         name: 'Amount money',
-        data: [],
+        data: null,
       }],
     };
+
+    /*if (this.token == null) {
+      this.props.history.replace('/login');
+
+    }*/
   }
+
+
+
 
 
   componentDidMount() {
     this._isMounted = true;
+
+
     //TODO: better component redirect auth
-    if (this.token == null) {
-      this.props.history.replace('/login');
-
-    }
-
-    this.props.onGettingTransaction(this.token,this.uId);
+    this.props.onGettingTransaction(this.token, this.uId);
 
 
-    const transactions = this.props.transactions.expenses.concat(this.props.transactions.incomes);
-    transactions.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+    const transactions = this.props.transactions; //.expenses.concat(this.props.transactions.incomes);
+    transactions.sort((a, b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
 
     console.log(transactions);
 
@@ -99,9 +105,6 @@ class HomePage extends Component {
     });*/
 
 
-
-
-
     this.setState({
       ...this.state,
       options: {
@@ -115,6 +118,9 @@ class HomePage extends Component {
         data: amountMoney,
       }],
     });
+
+
+    console.log('COMPONENT DID MOUNT');
 
 
   }
@@ -150,9 +156,10 @@ class HomePage extends Component {
             </div>
             <div className="HomeDashboard__overview">
               <div className="HomeDashboard__overview__chart">
-                <ReactApexCharts options={this.state.options} series={this.state.series} type="line" height={240}
-                                 className="charts"/>
-                {}
+                {this.state.series[0].data ?
+                  <ReactApexCharts options={this.state.options} series={this.state.series} type="line" height={240}
+                                   className="charts"/> : null}
+
               </div>
             </div>
             <div className="HomeDashboard__additionals">
@@ -169,7 +176,7 @@ const mapStateToProps = state => {
   return {
     user: state.user.user,
     bill: state.user.bill,
-    transactions: state.transaction,
+    transactions: state.user.transactions,
   };
 };
 

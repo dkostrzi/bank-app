@@ -17,7 +17,7 @@ const transactionList = (props)=>{
         </thead>
 
         <tbody>
-        {props.transaction.incomes.map(item => {
+        {props.transaction.map(item => {
           return <tr key={item.id}>
             <td>{item.id}</td>
             <td>{item.getSenderdata.name} {item.getSenderdata.surname}</td>
@@ -44,7 +44,7 @@ const transactionList = (props)=>{
         </thead>
 
         <tbody>
-        {props.transaction.expenses.map(item => {
+        {props.transaction.map(item => {
           return <tr key={item.id}>
             <td>{item.id}</td>
             <td>{item.getRecipientdata.name} {item.getRecipientdata.surname}</td>
