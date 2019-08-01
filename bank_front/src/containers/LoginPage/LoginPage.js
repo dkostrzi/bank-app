@@ -75,6 +75,9 @@ class LoginPage extends Component {
             </div>
 
             <div className="login-form__form">
+              <small>Demo account <br/>
+              Login: 1234 <br/> Password:1234
+              </small>
               <form onSubmit={this.auth}>
                 <input type="text" value={this.state.login} placeholder="Login"
                        onChange={(event) => this.handleChangeInput(event, 'login')}/>

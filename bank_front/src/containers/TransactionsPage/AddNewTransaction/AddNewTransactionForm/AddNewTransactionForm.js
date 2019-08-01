@@ -1,26 +1,34 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { ErrorMessage, Formik } from 'formik';
 import axios from 'axios';
 import { API_URL } from '../../../../utils/api';
 import Button from '../../../../components/Button/Button';
+import * as yup from 'yup'; // for everything
+import { setLocale } from 'yup';
 
 //TODO:from validation
 const addNewTransactionForm = (props) => {
+  setLocale({
+    number: 'Deve ser maior que',
+
+  });
+  let schema = yup.object().shape({
+    amountMoney: yup.number()
+      .typeError('Must be a number').required('Required'),
+    transferTitle:yup.string()
+      .required("Required")
+  });
+
   return (
     <div className="AddNewTransaction__transaction-from">
       <Formik
         initialValues={{
-          recipientId: '',
+          recipientId: props.recipientId,
           amountMoney: '',
           transferTitle: '',
           email: props.email,
         }}
-        validate={values => {
-          let errors = {};
-
-
-          return errors;
-        }}
+        validationSchema={schema}
         onSubmit={(values, actions) => {
           console.log(values);
           props.goToAuthKeyPage(values, actions);
@@ -37,12 +45,15 @@ const addNewTransactionForm = (props) => {
                    isSubmitting,
                  }) => (
           <form onSubmit={handleSubmit}>
-            <input type="text" name="recipientId" value={values.recipientId} placeholder="Recipient id"
+            <input onClick={props.openDialog} type="text" name="recipientId" value={props.recipientName}
+                   placeholder="Recipient id"
                    onChange={handleChange}/>
             <input type="text" name="amountMoney" value={values.amountMoney} placeholder="Amount money"
                    onChange={handleChange}/>
+            <ErrorMessage component="span" name="amountMoney"/>
             <input type="text" name="transferTitle" value={values.transferTitle} placeholder="Transfer Title"
                    onChange={handleChange}/>
+            <ErrorMessage component="span" name="transferTitle"/>
             <Button type="submit">Send</Button>
           </form>
 

@@ -23,7 +23,7 @@ class TransactionsPage extends Component {
     incomes: [],
     expenses: [],
     transactions: [],
-    activePage: 'ADD_NEW_TRANSACTION',
+    activePage: 'TRANSACTION_LIST',
   };
 
   changePage = (page) => {
@@ -49,7 +49,7 @@ class TransactionsPage extends Component {
   render() {
 
     const activePage = this.state.activePage === 'TRANSACTION_LIST' ?
-      <TransactionList transaction={this.props.transaction}/> : <AddNewTransaction getTransactions={this.updateTransactionsData}/>;
+      <TransactionList userId={this.uId} transaction={this.props.transaction}/> : <AddNewTransaction getTransactions={this.updateTransactionsData}/>;
 
 
     return (

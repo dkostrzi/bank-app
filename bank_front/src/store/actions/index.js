@@ -1,17 +1,18 @@
-export{
+export {
   authStart,
   auth,
   authCheckState,
-  logout
-} from './auth'
+  logout,
+} from './auth';
 
 export {
   getUserInfo,
   logoutUserInfo,
   gettingTransactions,
-} from './user'
+} from './user';
 
 
 export {
-
-} from './transaction'
+  startLoading,
+  stopLoading,
+} from './loading';

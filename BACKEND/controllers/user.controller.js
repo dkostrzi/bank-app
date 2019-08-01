@@ -9,7 +9,15 @@ const db = require('../config/db.config');
 
 exports.getAllUsers = (req, res) => {
   console.log('DECODED***********8', req.decoded);
-  helpers.getAllUsers().then(user => res.status(200).json(user));
+  db.users.findAll({
+    attributes: ['name', 'surname','id']
+  }).then(users=>{
+    res.status(200).json(users)
+  })
+    .catch(err=>{
+      res.status(400).json(err)
+    })
+//  helpers.getAllUsers().then(user => res.status(200).json(user));
 };
 
 exports.getTokenInfo = (req, res) => {

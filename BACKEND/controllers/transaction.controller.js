@@ -49,7 +49,9 @@ exports.registerTransaction = (req, res) => {
                     .catch(err => {
                       console.log('MAIL ERRROR: ', err);
                     });
-                });
+                }).catch(err => {
+                res.status(400).json({ success: false, error: err });
+              });
 
             });
         });
@@ -75,7 +77,7 @@ exports.confirmTransaction = (req, res) => {
       id: transactionId,
     },
   }).then(finded => {
-   // console.log('FINDED!!!-----', finded);
+    // console.log('FINDED!!!-----', finded);
     if (finded.authorization_key == authKey) {
       const { id_sender, id_recipient, amount_money } = finded;
       db.bills.findOne({
@@ -91,22 +93,21 @@ exports.confirmTransaction = (req, res) => {
               },
             })
               .then(recipient => {
-               // console.log('!!!!!!!!!!RECIEPIENT:!!! ', recipient);
+                // console.log('!!!!!!!!!!RECIEPIENT:!!! ', recipient);
                 updateRecipientMoney(amount_money, recipient.available_funds, id_recipient, true)
                   .then(() => {
-                    console.log("TRANSACTION ID:---- ",transactionId)
+                    console.log('TRANSACTION ID:---- ', transactionId);
                     db.transactions.update(
                       { authorization_status: 1 },
                       { where: { id: transactionId } },
-
                     ).then(() => {
                       res.status(200).json({ success: true });
                     })
-                      .catch(err=>{
+                      .catch(err => {
                         console.log(err);
                       });
                   })
-                  .catch(err=>{
+                  .catch(err => {
                     console.log(err);
                   });
               });

@@ -1,61 +1,63 @@
 import React from 'react';
+import Moment from 'react-moment';
 
 const transactionList = (props)=>{
   return(
     <div className="TransactionsDashboard__data">
-      <h3>Incomes</h3>
+      <h3>Transactions</h3>
       <table className="responsive-table highlight">
         <thead>
         <tr>
-          <th>Id</th>
-          <th>id payer</th>
-          <th>source bill</th>
-          <th>date</th>
-          <th>amount money</th>
-          <th>transfer title</th>
+          <th>No.</th>
+          <th>User</th>
+          <th>Bill</th>
+          <th>Date</th>
+          <th>Amount money</th>
+          <th>Transfer title</th>
         </tr>
         </thead>
 
         <tbody>
         {props.transaction.map(item => {
-          return <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.getSenderdata.name} {item.getSenderdata.surname}</td>
-            <td>{item.getSenderdata.bills[0].account_bill} </td>
-            <td>{item.date_time}</td>
-            <td>{item.amount_money}</td>
-            <td>{item.transfer_title}</td>
-          </tr>;
+
+          const ifSender = item.id_sender==props.userId?true:false;
+          const color = ifSender?"red":"green"
+          const style = {
+            color:color
+          };
+
+          if(ifSender){
+            return (<tr style={style} key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.getRecipientdata.name} {item.getRecipientdata.surname}</td>
+              <td>{item.getRecipientdata.bills[0].account_bill} </td>
+              {/*<td>{new Date(item.date_time).toTimeString()}</td>*/}
+              <td><Moment format="YYYY-MM-DD HH:mm">
+                {new Date(item.date_time)}
+              </Moment></td>
+              <td>$ {item.amount_money.toFixed(2)}</td>
+              <td>{item.transfer_title}</td>
+            </tr>)
+          }
+          else{
+            return (<tr style={style} key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.getSenderdata.name} {item.getSenderdata.surname}</td>
+              <td>{item.getSenderdata.bills[0].account_bill} </td>
+              <td><Moment format="YYYY-MM-DD HH:mm">
+                {new Date(item.date_time)}
+              </Moment></td>
+              <td>$   {item.amount_money.toFixed(2)}</td>
+              <td>{item.transfer_title}</td>
+            </tr>)
+          }
+
+
         })}
         </tbody>
       </table>
 
-      <h3>Expenses</h3>
-      <table className="responsive-table highlight">
-        <thead>
-        <tr>
-          <th>Id</th>
-          <th>id payer</th>
-          <th>source bill</th>
-          <th>date</th>
-          <th>amount money</th>
-          <th>transfer title</th>
-        </tr>
-        </thead>
 
-        <tbody>
-        {props.transaction.map(item => {
-          return <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.getRecipientdata.name} {item.getRecipientdata.surname}</td>
-            <td>{item.getRecipientdata.bills[0].account_bill} </td>
-            <td>{item.date_time}</td>
-            <td>{item.amount_money}</td>
-            <td>{item.transfer_title}</td>
-          </tr>;
-        })}
-        </tbody>
-      </table>
     </div>
   )
 }

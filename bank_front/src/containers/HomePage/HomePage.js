@@ -21,7 +21,7 @@ class HomePage extends Component {
       options: {
         chart: {
           zoom: {
-            enabled: false,
+            enabled: true,
           },
         },
         dataLabels: {
@@ -52,9 +52,6 @@ class HomePage extends Component {
 
     }*/
   }
-
-
-
 
 
   componentDidMount() {
@@ -157,7 +154,7 @@ class HomePage extends Component {
             <div className="HomeDashboard__overview">
               <div className="HomeDashboard__overview__chart">
                 {this.state.series[0].data ?
-                  <ReactApexCharts options={this.state.options} series={this.state.series} type="line" height={240}
+                  <ReactApexCharts options={this.state.options} series={this.state.series} type="line" height={'100%'}
                                    className="charts"/> : null}
 
               </div>

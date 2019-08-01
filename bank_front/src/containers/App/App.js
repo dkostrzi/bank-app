@@ -77,7 +77,7 @@ class App extends Component {
       layout = null;
     }*/
 
-    const loading = this.props.isLoading || this.props.isLoadingUser  ? <Loading/> : null;
+    const loading = this.props.isLoading || this.props.isLoadingUser ||this.props.loading ? <Loading/> : null;
 
     return (
       <>
@@ -106,6 +106,7 @@ const mapStateToProps = state => {
     isTransactions:state.user.transactionsLoaded,
    // isLoadingTransactions:state.transaction.loading,
     isUserInfo: state.user.user.id !== null,
+    loading:state.loading.loading
 
 
   };

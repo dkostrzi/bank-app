@@ -85,7 +85,9 @@ export const gettingTransactions = (token,uId) => {
           return transaction.id_sender === uId;
         });
 
-        dispatch(gettingTransactionsSuccess(incomes,expenses,res.data));
+        const transactions = res.data.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+
+        dispatch(gettingTransactionsSuccess(incomes,expenses,transactions));
 
 
 
