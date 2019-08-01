@@ -21,7 +21,7 @@ class HomePage extends Component {
       options: {
         chart: {
           zoom: {
-            enabled: true,
+            enabled: false,
           },
         },
         dataLabels: {

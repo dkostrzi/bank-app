@@ -59,6 +59,7 @@ class RegisterPage extends Component {
   };
 
   registerUser = (values, actions) => {
+    console.log(values)
     axios.post(`${API_URL}/register`, values)
       .then(res => {
         console.log(res.data);

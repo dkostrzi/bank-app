@@ -86,7 +86,7 @@ const registerForm = props => {
           </div>
           <div className="content__form__register-btn">
 
-            <Button disabled={isSubmitting}>Register</Button>
+            <Button type="submit" disabled={isSubmitting}>Register</Button>
           </div>
         </form>
       )}

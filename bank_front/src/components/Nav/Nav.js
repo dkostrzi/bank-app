@@ -11,10 +11,10 @@ const nav = props =>{
       </div>
       <nav className="Navigation__menu">
         <ul>
-          <li><NavLink to="/">Home</NavLink></li>
-          <li><NavLink to="/transactions">Transactions</NavLink></li>
-          <li><NavLink to="/settings">Settings</NavLink></li>
-          <li><NavLink to="/logout">Logout</NavLink></li>
+          <li><NavLink exact activeClassName="activeLink" to="/">Home</NavLink></li>
+          <li><NavLink exact activeClassName="activeLink" to="/transactions">Transactions</NavLink></li>
+          <li><NavLink exact activeClassName="activeLink" to="/settings">Settings</NavLink></li>
+          <li><NavLink exact activeClassName="activeLink" to="/logout">Logout</NavLink></li>
         </ul>
       </nav>
     </div>
