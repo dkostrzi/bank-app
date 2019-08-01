@@ -10,6 +10,28 @@
   flex-direction: column;
   flex: 1;
 
+  @media(max-width: $lg){
+    width:50%;
+    position: fixed;
+    z-index: 99;
+    transform: translateX(-105%);
+    transition: all 0.3s;
+
+    &.show{
+      transform: translateX(0%);
+    }
+  }
+
+  .close-icon{
+    display: none;
+    @media(max-width: $lg){
+      display: block;
+      position: fixed;
+      top:10px;
+      left: 10px;
+    }
+  }
+
   &__logo{
     background: #fff;
     display: flex;

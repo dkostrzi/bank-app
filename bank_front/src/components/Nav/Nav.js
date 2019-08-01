@@ -2,10 +2,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Nav.scss'
 import Logo from '../Logo/Logo';
+import CloseIcon from '@material-ui/icons/Close';
 
 const nav = props =>{
+
+  const show = props.show?'Navigation show':'Navigation';
+
   return(
-    <div className="Navigation">
+    <div className={show}>
+      <CloseIcon onClick={props.close} className="close-icon"/>
       <div className="Navigation__logo">
         <Logo/>
       </div>

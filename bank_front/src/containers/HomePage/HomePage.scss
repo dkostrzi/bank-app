@@ -15,6 +15,13 @@
     justify-content: space-between;
     align-items: center;
 
+    @media (max-width: $lg) {
+      flex-direction: column;
+      justify-content: unset;
+      align-items: unset;
+      height: unset;
+    }
+
     &__bill{
       .title{
         font-size: 1.1rem;
@@ -25,6 +32,10 @@
         text-align: center;
         font-size: 1.4rem ;
         margin-top: 10px;
+        @media (max-width: $lg) {
+          font-size: 1rem;
+          text-align: left;
+        }
       }
       .email{
         font-size: 0.8rem;

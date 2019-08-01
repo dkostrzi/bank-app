@@ -15,8 +15,14 @@ import LogoutPage from '../LogoutPage/LogoutPage';
 import PrivateRoute from '../privateRoute';
 import Spinner from '../../components/Spinner/Spinner';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
+import HamburgerIcon from '@material-ui/icons/Reorder';
+
 
 class App extends Component {
+
+  state = {
+    showMobileNav: false,
+  };
 
 
   componentDidMount() {
@@ -25,6 +31,17 @@ class App extends Component {
       this.props.history.replace('/login');
     }*/
   }
+
+  openMenu = () => {
+    this.setState({
+      showMobileNav: true,
+    });
+  };
+  closeMobileMenu = () => {
+    this.setState({
+      showMobileNav: false,
+    });
+  };
 
   render() {
 
@@ -42,20 +59,20 @@ class App extends Component {
 
     let layout = null;
 
-    if(!this.props.isAuth){
+    if (!this.props.isAuth) {
       layout = (
         <div className="App">
           {routes}
         </div>
       );
-    }
-    else if(this.props.isAuth && this.props.isUserInfo && this.props.isTransactions){
+    } else if (this.props.isAuth && this.props.isUserInfo && this.props.isTransactions) {
       layout = (
         <div className="App">
           <div className="App__dashboard">
-            <Nav/>
+            <Nav close={this.closeMobileMenu} show={this.state.showMobileNav}/>
             <div className="App__dashboard__container">
               <div className="App__dashboard__container__top-bar">
+                <HamburgerIcon className="mobile-menu-icon" onClick={this.openMenu}/>
                 <div className="App__dashboard__container__top-bar__email">
                   {localStorage.getItem('email')}
                 </div>
@@ -65,22 +82,21 @@ class App extends Component {
           </div>
         </div>
       );
-    }
-    else{
+    } else {
       layout = (
-        <LoadingScreen />
-      )
+        <LoadingScreen/>
+      );
     }
 
-   /* if (this.props.isAuth && this.props.isUserInfo && this.props.isTransactions) {
+    /* if (this.props.isAuth && this.props.isUserInfo && this.props.isTransactions) {
 
-    } else if(!this.props.isAuth && !this.props.isUserInfo && !this.props.isTransactions) {
+     } else if(!this.props.isAuth && !this.props.isUserInfo && !this.props.isTransactions) {
 
-    }else{
-      layout = null;
-    }*/
+     }else{
+       layout = null;
+     }*/
 
-    const loading = this.props.isLoading || this.props.isLoadingUser ||this.props.loading ? <Loading/> : null;
+    const loading = this.props.isLoading || this.props.isLoadingUser || this.props.loading ? <Loading/> : null;
 
     return (
       <>
@@ -106,10 +122,10 @@ const mapStateToProps = state => {
     isAuth: state.auth.token,
     isLoading: state.auth.loading,
     isLoadingUser: state.user.loading,
-    isTransactions:state.user.transactionsLoaded,
-   // isLoadingTransactions:state.transaction.loading,
+    isTransactions: state.user.transactionsLoaded,
+    // isLoadingTransactions:state.transaction.loading,
     isUserInfo: state.user.user.id !== null,
-    loading:state.loading.loading
+    loading: state.loading.loading,
 
 
   };
