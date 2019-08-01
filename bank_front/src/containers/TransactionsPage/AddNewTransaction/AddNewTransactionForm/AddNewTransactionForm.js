@@ -14,6 +14,8 @@ const addNewTransactionForm = (props) => {
   });
   let schema = yup.object().shape({
     amountMoney: yup.number()
+      .positive()
+      .min(0.01,"Minimal amount money is $ 0.01")
       .typeError('Must be a number').required('Required'),
     transferTitle:yup.string()
       .required("Required")

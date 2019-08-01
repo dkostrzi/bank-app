@@ -28,7 +28,8 @@ class HomePage extends Component {
           enabled: false,
         },
         stroke: {
-          curve: 'straight',
+          curve: 'smooth',
+          colors:['#035ee6']
         },
 
         grid: {
@@ -139,9 +140,9 @@ class HomePage extends Component {
           <div className="HomeDashboard">
             <div className="HomeDashboard__account-balance">
               <div className="HomeDashboard__account-balance__bill">
-                <p className="title">Bill</p>
+                <p className="title">Bill number</p>
                 <p className="bill">{this.props.bill.account_bill}</p>
-                <p className="email">{this.props.user.email}</p>
+                <p className="email">{this.props.user.name} {this.props.user.surname}</p>
               </div>
               <div className="HomeDashboard__account-balance__funds">
                 <p className="title">Balance</p>

@@ -14,6 +14,7 @@ import NotFound from '../NotFoundPage/NotFound';
 import LogoutPage from '../LogoutPage/LogoutPage';
 import PrivateRoute from '../privateRoute';
 import Spinner from '../../components/Spinner/Spinner';
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 
 class App extends Component {
 
@@ -55,7 +56,9 @@ class App extends Component {
             <Nav/>
             <div className="App__dashboard__container">
               <div className="App__dashboard__container__top-bar">
-
+                <div className="App__dashboard__container__top-bar__email">
+                  {localStorage.getItem('email')}
+                </div>
               </div>
               {routes}
             </div>
@@ -65,7 +68,7 @@ class App extends Component {
     }
     else{
       layout = (
-        <Spinner/>
+        <LoadingScreen />
       )
     }
 

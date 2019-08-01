@@ -2,6 +2,7 @@ import React from 'react';
 import Moment from 'react-moment';
 
 const transactionList = (props)=>{
+  let lp = 0;
   return(
     <div className="TransactionsDashboard__data">
       <h3>Transactions</h3>
@@ -21,14 +22,16 @@ const transactionList = (props)=>{
         {props.transaction.map(item => {
 
           const ifSender = item.id_sender==props.userId?true:false;
-          const color = ifSender?"red":"green"
+          const color = ifSender?"red":"green";
           const style = {
             color:color
           };
 
+
+          lp++;
           if(ifSender){
             return (<tr style={style} key={item.id}>
-              <td>{item.id}</td>
+              <td>{lp}</td>
               <td>{item.getRecipientdata.name} {item.getRecipientdata.surname}</td>
               <td>{item.getRecipientdata.bills[0].account_bill} </td>
               {/*<td>{new Date(item.date_time).toTimeString()}</td>*/}
@@ -41,7 +44,7 @@ const transactionList = (props)=>{
           }
           else{
             return (<tr style={style} key={item.id}>
-              <td>{item.id}</td>
+              <td>{lp}</td>
               <td>{item.getSenderdata.name} {item.getSenderdata.surname}</td>
               <td>{item.getSenderdata.bills[0].account_bill} </td>
               <td><Moment format="YYYY-MM-DD HH:mm">

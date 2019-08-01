@@ -16,6 +16,15 @@
                 background: $bank-primary-blue-second;
                 background: $bank-primary-blue-gradient;
                 height: 10%;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                &__email{
+                    color: #fff;
+                    font-size: 1.2rem;
+                    margin-right: 20px;
+                    font-weight: 700;
+                }
             }
         }
 

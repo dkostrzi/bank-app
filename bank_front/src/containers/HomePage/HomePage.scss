@@ -10,15 +10,16 @@
     @include bank-shadow;
     height: calc(30% - 20px);
     margin: 10px;
-    padding: 10px;
+    padding: 10px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     &__bill{
       .title{
-        font-size: 0.9rem;
-        font-weight: 600;
+        font-size: 1.1rem;
+        font-weight: 900;
+        text-transform: uppercase;
       }
       .bill{
         text-align: center;
@@ -28,13 +29,15 @@
       .email{
         font-size: 0.8rem;
         margin-top: 10px;
+        font-weight: 600;
       }
     }
 
     &__funds{
       .title{
-        font-size: 0.9rem;
-        font-weight: 600;
+        font-size: 1.1rem;
+        font-weight: 900;
+        text-transform: uppercase;
       }
       .balance{
         font-size: 3rem;
@@ -47,10 +50,10 @@
 
   &__overview{
     @include bank-shadow;
-    height: calc(45% - 20px);
+    height: calc(60% - 20px);
     margin: 10px;
     &__chart{
-      width: 70%;
+      width: 95%;
       height: 100%;
       .charts{
         height: 100%;
@@ -58,6 +61,7 @@
     }
   }
   &__additionals{
+    display: none;
     @include bank-shadow;
     margin: 10px;
     height: calc(25% - 10px);
