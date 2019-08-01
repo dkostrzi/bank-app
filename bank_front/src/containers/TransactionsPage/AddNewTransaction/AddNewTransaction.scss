@@ -1,5 +1,23 @@
 .AddNewTransaction{
-  form {
+  &__transaction-from {
     padding: 50px;
+    form{
+      button{
+        margin-top: 20px;
+      }
+    }
+  }
+
+  &__auth-key{
+    padding: 50px;
+    h2{
+      font-size: 1.3rem;
+      text-align: center;
+    }
+    form{
+      button{
+        margin-top: 20px;
+      }
+    }
   }
 }

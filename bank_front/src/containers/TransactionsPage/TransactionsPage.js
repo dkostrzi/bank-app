@@ -23,7 +23,7 @@ class TransactionsPage extends Component {
     incomes: [],
     expenses: [],
     transactions: [],
-    activePage: 'TRANSACTION_LIST',
+    activePage: 'ADD_NEW_TRANSACTION',
   };
 
   changePage = (page) => {

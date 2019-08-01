@@ -4,6 +4,9 @@ import Button from '../../../components/Button/Button';
 import { API_URL } from '../../../utils/api';
 import axios from 'axios';
 import './AddNewTransaction.scss';
+import AddNewTransactionForm from './AddNewTransactionForm/AddNewTransactionForm';
+import AddNewTransactionAuthKey from './AddNewTransactionAuthKey/AddNewTransactionAuthKey';
+import AddNewTransactionSuccess from './AddNewTransactionSuccess/AddNewTransactionSuccess';
 
 
 class AddNewTransaction extends Component {
@@ -30,8 +33,8 @@ class AddNewTransaction extends Component {
     });
   };
 
-  checkAuthKey = () => {
-
+  checkAuthKey = (e) => {
+    e.preventDefault();
     axios.post(`${API_URL}/transaction/confirm`, {
       transactionId: this.state.transactionId,
       authKey: this.state.authKeyVal,
@@ -42,96 +45,57 @@ class AddNewTransaction extends Component {
     })
       .then(res => {
         console.log(res.data);
-        if(res.data.success){
+        if (res.data.success) {
           this.setState({
             ...this.state,
-            activePage:"SUCCESS_TRANSACTION_AUTHORIZED"
-          })
+            activePage: 'SUCCESS_TRANSACTION_AUTHORIZED',
+          });
           this.props.getTransactions();
         }
       }).catch(err => {
-      console.log(err);
+      console.log(err.response.data);
     });
+
+
+  };
+
+  goToAuthKeyPage = (values,actions) => {
+
+    axios.post(`${API_URL}/transaction/register`, values, {
+      headers: {
+        Authorization: `JWT ${this.token}`,
+      },
+    })
+      .then(res => {
+        console.log(res.data);
+
+        this.setState({
+          ...this.state,
+          activePage: 'AUTH_KEY_FORM',
+          /*authorization_key: res.data.authorization_key,*/
+          transactionId: res.data.id,
+        });
+      })
+      .catch(err => {
+        console.log(err.response.data);
+      });
 
 
   };
 
   render() {
 
-    let activePage =  null;
+    let activePage = null;
 
-    if(this.state.activePage === 'TRANSACTION_FORM'){
-      activePage =  (<Formik
-        initialValues={{
-          recipientId: '',
-          amountMoney: '',
-          transferTitle: '',
-          email:this.email
-        }}
-        validate={values => {
-          let errors = {};
+    if (this.state.activePage === 'TRANSACTION_FORM') {
+      activePage = <AddNewTransactionForm email={this.email} token={this.token}
+                                          goToAuthKeyPage={(id) => this.goToAuthKeyPage(id)}/>;
 
-
-          return errors;
-        }}
-        onSubmit={(values, actions) => {
-          console.log(values);
-          axios.post(`${API_URL}/transaction/register`, values, {
-            headers: {
-              Authorization: `JWT ${this.token}`,
-            },
-          })
-            .then(res => {
-              console.log(res.data);
-              this.setState({
-                ...this.state,
-                activePage: 'AUTH_KEY_FORM',
-                /*authorization_key: res.data.authorization_key,*/
-                transactionId: res.data.id,
-              });
-            })
-            .catch(err => {
-              console.log(err);
-            });
-
-        }}
-        render={({
-                   values,
-                   errors,
-                   status,
-                   touched,
-                   handleBlur,
-                   handleChange,
-                   handleSubmit,
-                   isSubmitting,
-                 }) => (
-          <form onSubmit={handleSubmit}>
-            <input type="text" name="recipientId" value={values.recipientId} placeholder="recipientId"
-                   onChange={handleChange}/>
-            <input type="text" name="amountMoney" value={values.amountMoney} placeholder="amountMoney"
-                   onChange={handleChange}/>
-            <input type="text" name="transferTitle" value={values.transferTitle} placeholder="transferTitle"
-                   onChange={handleChange}/>
-            <Button type="submit">Send</Button>
-          </form>
-        )}
-      />)
-    }
-    else if(this.state.activePage === 'AUTH_KEY_FORM'){
-      activePage = (
-        <div>
-          <input type="text" value={this.state.authKeyVal} onChange={this.handleInputChange}
-                 placeholder="enter auth key"/>
-          <Button click={this.checkAuthKey}>Accept</Button>
-        </div>
-      )
-    }
-    else if(this.state.activePage==='SUCCESS_TRANSACTION_AUTHORIZED'){
-      activePage = (
-        <div>
-          <h1>SUCCESS</h1>
-        </div>
-      )
+    } else if (this.state.activePage === 'AUTH_KEY_FORM') {
+      activePage = <AddNewTransactionAuthKey email={this.email} checkAuthKey={this.checkAuthKey} authKeyVal={this.state.authKeyVal}
+                                             handleInputChange={this.handleInputChange}/>;
+    } else if (this.state.activePage === 'SUCCESS_TRANSACTION_AUTHORIZED') {
+      activePage = <AddNewTransactionSuccess/>;
     }
 
     return (

@@ -170,7 +170,7 @@ async function updateSenderMoney(money, senderAvailableFunds, senderId, isConfir
   const diff = (parseFloat(senderAvailableFunds) - parseFloat(money));
 
   if (diff < 0) {
-    throw new Error('Sender dosen\'t have enough funds');
+    throw new Error('Sender dosent have enough funds');
 
   } else {
     if (isConfirm) {
