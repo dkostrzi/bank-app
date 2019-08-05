@@ -25,7 +25,7 @@ class AddNewTransaction extends Component {
 
   constructor(props) {
     super(props);
-    this.email = localStorage.getItem('email');
+    this.email = this.props.user.email;
     this.token = localStorage.getItem('token');
 
   }
@@ -185,4 +185,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(AddNewTransaction);
+const mapStateToProps = state=>{
+  return{
+    user:state.user.user
+  }
+;}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewTransaction);

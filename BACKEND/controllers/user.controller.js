@@ -10,13 +10,13 @@ const db = require('../config/db.config');
 exports.getAllUsers = (req, res) => {
   console.log('DECODED***********8', req.decoded);
   db.users.findAll({
-    attributes: ['name', 'surname','id']
-  }).then(users=>{
-    res.status(200).json(users)
+    attributes: ['name', 'surname', 'id'],
+  }).then(users => {
+    res.status(200).json(users);
   })
-    .catch(err=>{
-      res.status(400).json(err)
-    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
 //  helpers.getAllUsers().then(user => res.status(200).json(user));
 };
 
@@ -34,33 +34,51 @@ exports.loginUser = (req, res) => {
   res.status(200).json(req.loginInfo);
 };
 
-exports.getUserInfo = (req,res) =>{
+exports.getUserInfo = (req, res) => {
   const uId = req.decoded.id;
 
   db.users.findOne({
-    where:{
-      id:uId
-    }
+    where: {
+      id: uId,
+    },
   })
-    .then(user=>{
+    .then(user => {
       db.bills.findOne({
-        where:{
-          id_owner:uId
-        }
-      }).then(bill=>{
+        where: {
+          id_owner: uId,
+        },
+      }).then(bill => {
 
         const result = {
-          user:user,
-          bill:bill
+          user: user,
+          bill: bill,
         };
 
-        res.status(200).json(result)
-      })
+        res.status(200).json(result);
+      });
 
-    })
+    });
 
 
+};
 
-}
+exports.updateUser = (req, res) => {
+  const uId = req.decoded.id;
+  db.users.findOne({
+    where: {
+      id: uId,
+    },
+  }).then(user => {
+    user.update({
+      name: req.body.name,
+      surname: req.body.surname,
+      email: req.body.email,
+    }).then(updated => {
+      res.status(200).json({ success: true, message: 'user updated' });
+    });
 
+  }).catch(err => {
+    res.status(404).json({ success: false, message: 'user not found' });
+  });
+};
 

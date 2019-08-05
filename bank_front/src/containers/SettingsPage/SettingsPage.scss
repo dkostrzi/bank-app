@@ -1,0 +1,40 @@
+.SettingsPage {
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  .SettingsPage__user{
+    display: flex;
+
+  }
+
+  &__user-avatar {
+    .icon {
+      font-size: 10rem;
+    }
+
+  }
+
+  &__user-data {
+
+    span {
+      font-weight: 800;
+    }
+
+    button {
+      margin-top: 20px;
+    }
+  }
+
+  &__edit-form {
+    width:50%;
+    form{
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    button{
+      margin-top: 20px;
+    }
+  }
+}

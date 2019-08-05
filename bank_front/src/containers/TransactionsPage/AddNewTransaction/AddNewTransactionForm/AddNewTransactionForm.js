@@ -4,14 +4,11 @@ import axios from 'axios';
 import { API_URL } from '../../../../utils/api';
 import Button from '../../../../components/Button/Button';
 import * as yup from 'yup'; // for everything
-import { setLocale } from 'yup';
+
 
 //TODO:from validation
 const addNewTransactionForm = (props) => {
-  setLocale({
-    number: 'Deve ser maior que',
 
-  });
   let schema = yup.object().shape({
     amountMoney: yup.number()
       .positive()

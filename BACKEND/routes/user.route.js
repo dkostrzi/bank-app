@@ -22,6 +22,8 @@ module.exports = app => {
 
   app.post('/api/login', logInMiddleware, userController.loginUser);
 
+  app.put('/api/user',checkToken,userController.updateUser);
+
 
   app.get('/findUser', (req, res, next) => {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {

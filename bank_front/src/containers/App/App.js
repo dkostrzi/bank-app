@@ -16,6 +16,7 @@ import PrivateRoute from '../privateRoute';
 import Spinner from '../../components/Spinner/Spinner';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import HamburgerIcon from '@material-ui/icons/Reorder';
+import SettingsPage from '../SettingsPage/SettingsPage';
 
 
 class App extends Component {
@@ -52,6 +53,7 @@ class App extends Component {
         <Route path="/register" component={RegisterPage}/>
         <PrivateRoute path="/" exact component={HomePage}/>
         <PrivateRoute path="/transactions" exact component={TransactionsPage}/>
+        <PrivateRoute path="/settings" exact component={SettingsPage}/>
         <Route path="/logout" exact component={LogoutPage}/>
         <Route path="*" exact component={NotFound}/>
       </Switch>
@@ -74,7 +76,7 @@ class App extends Component {
               <div className="App__dashboard__container__top-bar">
                 <HamburgerIcon className="mobile-menu-icon" onClick={this.openMenu}/>
                 <div className="App__dashboard__container__top-bar__email">
-                  {localStorage.getItem('email')}
+                  {this.props.user.email}
                 </div>
               </div>
               {routes}
@@ -126,6 +128,7 @@ const mapStateToProps = state => {
     // isLoadingTransactions:state.transaction.loading,
     isUserInfo: state.user.user.id !== null,
     loading: state.loading.loading,
+    user:state.user.user
 
 
   };
