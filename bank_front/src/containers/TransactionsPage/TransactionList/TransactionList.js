@@ -38,7 +38,7 @@ const transactionList = (props)=>{
               <td><Moment format="YYYY-MM-DD HH:mm">
                 {new Date(item.date_time)}
               </Moment></td>
-              <td>$ {item.amount_money.toFixed(2)}</td>
+              <td>-{item.amount_money.toFixed(2)} $</td>
               <td>{item.transfer_title}</td>
             </tr>)
           }
@@ -50,7 +50,7 @@ const transactionList = (props)=>{
               <td><Moment format="YYYY-MM-DD HH:mm">
                 {new Date(item.date_time)}
               </Moment></td>
-              <td>$   {item.amount_money.toFixed(2)}</td>
+              <td>{item.amount_money.toFixed(2)} $</td>
               <td>{item.transfer_title}</td>
             </tr>)
           }

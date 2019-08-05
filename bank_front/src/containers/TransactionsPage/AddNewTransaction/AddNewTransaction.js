@@ -157,7 +157,7 @@ class AddNewTransaction extends Component {
         <Dialog fullScreen open={this.state.openDialog} onClose={this.handleCloseDialog}
                 aria-labelledby="form-dialog-title">
           <AppBar style={{ position: 'relative' }}>
-            <Toolbar>
+            <Toolbar style={{backgroundColor:'#035ee6'}}>
               <IconButton edge="start" color="inherit" onClick={this.handleCloseDialog} aria-label="close">
                 <CloseIcon/>
               </IconButton>

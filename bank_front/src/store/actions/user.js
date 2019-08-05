@@ -94,7 +94,7 @@ export const gettingTransactions = (token,uId) => {
       })
       .catch(err=>{
         console.log(err)
-        dispatch(gettingTransactionsFailed(err.response.data))
+        dispatch(gettingTransactionsFailed(err))
       });
   }
 
