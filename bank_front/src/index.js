@@ -14,7 +14,7 @@ import thunk from 'redux-thunk';
 import authReducer from './store/reducers/auth'
 import userReducer from './store/reducers/user'
 import loadingReducer from './store/reducers/loading'
-import transactionReducer from './store/reducers/transaction'
+
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 const composeEnhancers = process.env.NODE_ENV ==='development'? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__:null || compose ;
 
@@ -22,7 +22,6 @@ const rootReducer = combineReducers({
   auth:authReducer,
   user:userReducer,
   loading:loadingReducer,
-  //transaction:transactionReducer,
   toastr: toastrReducer // <- Mounted at toastr.
 });
 

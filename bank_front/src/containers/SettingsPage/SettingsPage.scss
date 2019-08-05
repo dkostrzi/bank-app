@@ -1,7 +1,13 @@
+@import '../../assets/styles/variables';
+
 .SettingsPage {
   padding: 50px;
   display: flex;
   justify-content: space-between;
+  @media (max-width: $sm) {
+    flex-direction: column;
+  }
+
   .SettingsPage__user{
     display: flex;
 

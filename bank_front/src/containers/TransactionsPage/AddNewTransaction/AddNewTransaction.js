@@ -32,7 +32,6 @@ class AddNewTransaction extends Component {
 
   state = {
     activePage: 'TRANSACTION_FORM',
-
     authorization_key: '',
     authKeyVal: '',
     transactionId: null,

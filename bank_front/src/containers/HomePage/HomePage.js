@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './HomePage.scss';
 import ReactApexCharts from 'react-apexcharts';
 import * as actions from '../../store/actions';
-import { Redirect } from 'react-router-dom';
+
 
 
 class HomePage extends Component {

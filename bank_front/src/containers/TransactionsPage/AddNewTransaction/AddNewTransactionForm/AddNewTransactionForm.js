@@ -1,7 +1,5 @@
 import React from 'react';
 import { ErrorMessage, Formik } from 'formik';
-import axios from 'axios';
-import { API_URL } from '../../../../utils/api';
 import Button from '../../../../components/Button/Button';
 import * as yup from 'yup'; // for everything
 

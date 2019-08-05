@@ -13,7 +13,6 @@ import TransactionsPage from '../TransactionsPage/TransactionsPage';
 import NotFound from '../NotFoundPage/NotFound';
 import LogoutPage from '../LogoutPage/LogoutPage';
 import PrivateRoute from '../privateRoute';
-import Spinner from '../../components/Spinner/Spinner';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import HamburgerIcon from '@material-ui/icons/Reorder';
 import SettingsPage from '../SettingsPage/SettingsPage';
