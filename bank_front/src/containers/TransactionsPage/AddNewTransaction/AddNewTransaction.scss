@@ -20,4 +20,23 @@
       }
     }
   }
+
+  &__auth-success{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+
+    padding: 50px;
+    h1{
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    p{
+      text-align: center;
+      font-size: 1.4rem;
+    }
+
+  }
 }
