@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/BACKEND/package-lock.json
+/bank_front/package-lock.json

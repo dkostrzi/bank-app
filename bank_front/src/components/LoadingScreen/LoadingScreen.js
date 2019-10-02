@@ -4,12 +4,12 @@ import Spinner from '../Spinner/Spinner';
 import './LoadingScreen.scss';
 
 
-const loadingScreen = props=>{
+const loadingScreen = props => {
   return <div className="LoadingScreen">
 
     <img src={logoImg} alt="logo"/>
     <Spinner/>
-  </div>
+  </div>;
 };
 
 export default loadingScreen;

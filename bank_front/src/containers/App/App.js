@@ -12,7 +12,7 @@ import Nav from '../../components/Nav/Nav';
 import TransactionsPage from '../TransactionsPage/TransactionsPage';
 import NotFound from '../NotFoundPage/NotFound';
 import LogoutPage from '../LogoutPage/LogoutPage';
-import PrivateRoute from '../privateRoute';
+import PrivateRoute from '../../utils/privateRoute';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import HamburgerIcon from '@material-ui/icons/Reorder';
 import SettingsPage from '../SettingsPage/SettingsPage';

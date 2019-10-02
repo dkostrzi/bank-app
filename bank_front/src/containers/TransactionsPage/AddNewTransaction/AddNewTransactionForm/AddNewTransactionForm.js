@@ -4,7 +4,7 @@ import Button from '../../../../components/Button/Button';
 import * as yup from 'yup'; // for everything
 
 
-//TODO:from validation
+
 const addNewTransactionForm = (props) => {
 
   let schema = yup.object().shape({
@@ -42,7 +42,7 @@ const addNewTransactionForm = (props) => {
                    isSubmitting,
                  }) => (
           <form onSubmit={handleSubmit}>
-            <input onClick={props.openDialog} type="text" name="recipientId" value={props.recipientName}
+            <input onClick={props.openDialog} type="text" name="Recipient" value={props.recipientName}
                    placeholder="Recipient id"
                    onChange={handleChange}/>
             <input type="text" name="amountMoney" value={values.amountMoney} placeholder="Amount money"

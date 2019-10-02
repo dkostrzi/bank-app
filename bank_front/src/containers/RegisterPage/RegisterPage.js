@@ -6,6 +6,8 @@ import axios from 'axios';
 import { API_URL } from '../../utils/api';
 import RegisteredUser from './RegisteredUserInfo/RegisteredUser';
 import RegisterForm from './RegisterForm/RegisterForm';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 
 class RegisterPage extends Component {
 
@@ -60,9 +62,11 @@ class RegisterPage extends Component {
 
   registerUser = (values, actions) => {
     console.log(values)
+    this.props.onStartLoading();
     axios.post(`${API_URL}/register`, values)
       .then(res => {
         console.log(res.data);
+        this.props.onStopLoading();
         actions.setSubmitting(false);
         this.setState({
           isRegisterSuccess: true,
@@ -70,6 +74,7 @@ class RegisterPage extends Component {
         });
       })
       .catch(err => {
+        this.props.onStopLoading();
         console.log(err.response.data);
         this.setState({
           error: err.response.data.error,
@@ -112,4 +117,11 @@ class RegisterPage extends Component {
   }
 };
 
-export default RegisterPage;
+const mapDispatchToProps = dispatch =>{
+  return{
+    onStartLoading:()=>dispatch(actions.startLoading()),
+    onStopLoading:()=>dispatch(actions.stopLoading())
+  }
+};
+
+export default connect(null, mapDispatchToProps)(RegisterPage);

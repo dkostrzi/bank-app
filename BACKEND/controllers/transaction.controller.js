@@ -194,7 +194,7 @@ async function updateRecipientMoney(money, recipientAvailableFunds, recipientId,
 
 }
 
-//TODO:generate transaction key
+
 function generateKey() {
   function getRandomInt(min, max) {
     min = Math.ceil(min);

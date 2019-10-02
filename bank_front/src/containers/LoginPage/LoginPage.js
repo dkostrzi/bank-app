@@ -56,7 +56,7 @@ class LoginPage extends Component {
 
     const errorsMessage = this.props.auth.error ? <span style={{ color: 'red' }}>{this.props.auth.error}</span> : null;
 
-    //TODO: login container to form - enter will be work
+
     return (
       <>
 
