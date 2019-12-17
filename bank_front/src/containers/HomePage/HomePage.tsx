@@ -4,25 +4,25 @@ import './HomePage.scss';
 import ReactApexCharts from 'react-apexcharts';
 import * as actions from '../../store/actions';
 
-interface Props {
-  transactions:any;
-  bill:any;
-  onGettingTransaction(token:any, uId:any): void;
-  user:any;
+interface IProps {
+  transactions: any;
+  bill: any;
+  onGettingTransaction(token: any, uId: any): void;
+  user: any;
 }
 
-interface State  {
-  options:any;
-  series:any;
+interface IState {
+  options: any;
+  series: any;
 }
-class HomePage extends React.Component<Props,State>  {
+class HomePage extends React.Component<IProps, IState>  {
   uId: any;
   _isMounted: boolean;
   token: any;
 
-  constructor(props:any) {
+  constructor(props: IProps) {
     super(props);
-    const id:any = localStorage.getItem('userId');
+    const id: any = localStorage.getItem('userId');
     this.uId = parseInt(id);
     this._isMounted = false;
     this.token = localStorage.getItem('token');
@@ -42,7 +42,7 @@ class HomePage extends React.Component<Props,State>  {
         },
         stroke: {
           curve: 'smooth',
-          colors:['#035ee6']
+          colors: ['#035ee6']
         },
 
         grid: {
@@ -68,7 +68,7 @@ class HomePage extends React.Component<Props,State>  {
   }
 
 
-  componentDidMount() {
+  public componentDidMount() {
     this._isMounted = true;
 
 
@@ -77,7 +77,7 @@ class HomePage extends React.Component<Props,State>  {
 
 
     const transactions = this.props.transactions; //.expenses.concat(this.props.transactions.incomes);
-    transactions.sort((a:any, b:any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+    transactions.sort((a: any, b: any) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
 
     console.log(transactions);
 
@@ -87,7 +87,7 @@ class HomePage extends React.Component<Props,State>  {
 
     let xAxis = [];
     xAxis.push('Started');
-    transactions.map((item:any) => {
+    transactions.map((item: any) => {
       if (item.id_sender == this.uId) {
         startingFunds = startingFunds + item.amount_money;
       } else {
@@ -97,7 +97,7 @@ class HomePage extends React.Component<Props,State>  {
     });
     amountMoney.push(startingFunds.toFixed(2));
 
-    transactions.map((item:any) => {
+    transactions.map((item: any) => {
       if (item.id_sender == this.uId) {
         startingFunds = startingFunds - item.amount_money;
         amountMoney.push(startingFunds.toFixed(2));
@@ -136,12 +136,12 @@ class HomePage extends React.Component<Props,State>  {
 
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     this._isMounted = false;
   }
 
 
-  render() {
+  public render() {
 
     const billBalance = this.props.bill.available_funds.toFixed(2);
 
@@ -168,9 +168,8 @@ class HomePage extends React.Component<Props,State>  {
             <div className="HomeDashboard__overview">
               <div className="HomeDashboard__overview__chart">
                 {this.state.series[0].data ?
-                // @ts-ignore: Unreachable code error ReactApexCharts not supporting TS
-                  <ReactApexCharts options={this.state.options} series={this.state.series} type="line" height={'100%'}
-                                   className="charts"/> : null}
+                  // @ts-ignore: Unreachable code error ReactApexCharts not supporting TS
+                  <ReactApexCharts options={this.state.options} series={this.state.series} type="line" height={'100%'} className="charts" /> : null}
 
               </div>
             </div>
@@ -184,7 +183,7 @@ class HomePage extends React.Component<Props,State>  {
   }
 }
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: any) => {
   return {
     user: state.user.user,
     bill: state.user.bill,
@@ -192,9 +191,9 @@ const mapStateToProps = (state:any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch:any) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    onGettingTransaction: (token:any, uId:any) => dispatch(actions.gettingTransactions(token, uId)),
+    onGettingTransaction: (token: any, uId: any) => dispatch(actions.gettingTransactions(token, uId)),
   };
 };
 
