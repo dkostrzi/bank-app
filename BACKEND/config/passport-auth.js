@@ -8,7 +8,7 @@ const BCRYPT_SALT_ROUNDS = 12;
 const passport = require('passport'),
   localStrategy = require('passport-local').Strategy,
   User = require('./db.config').users,
-  jwtOptions = require('./jwt.config').jwtOptions;
+  jwtOptions = require('./jwt.config').jwtOptions,
   JWTstrategy = require('passport-jwt').Strategy,
   ExtractJWT = require('passport-jwt').ExtractJwt;
 
