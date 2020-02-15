@@ -12,6 +12,7 @@ import { getAllUsers, getTokenInfo, getUserInfo } from '../controllers/user.cont
 import UserController from '../controllers/user.controller';
 
 module.exports = app => {
+  
 
   app.get('/api/test', (req, res, next) => res.status(200).send('test'))
 
